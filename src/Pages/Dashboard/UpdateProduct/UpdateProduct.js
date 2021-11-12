@@ -14,7 +14,7 @@ const UpdateProduct = () => {
             .then(data => setUpdateData(data) || '')
     }, [])
 
-    // console.log(updateData)
+
 
     const handleProductDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
@@ -29,7 +29,7 @@ const UpdateProduct = () => {
 
     return (
         <div>
-            <h1>Update Product</h1>
+            <h1 className='text-pink-700 underline uppercase py-4'>Update Product</h1>
             <div className="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
                 {
                     updateData.map(product =>

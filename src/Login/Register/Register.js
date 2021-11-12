@@ -24,7 +24,7 @@ const Register = () => {
             return alert('Your PassWord ded not match')
 
         }
-        // console.log(loginData)
+
         registerUser(loginData.email, loginData.password, loginData.name, location, history)
 
         e.preventDefault();

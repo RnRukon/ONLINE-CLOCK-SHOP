@@ -14,7 +14,7 @@ const UpdateProductFrom = () => {
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])
-    // console.log(id)
+
 
     const { title, img, description, price } = product;
 
@@ -24,7 +24,7 @@ const UpdateProductFrom = () => {
 
 
     const update = (data) => {
-        console.log(data)
+
         axios.put(`https://evening-woodland-47343.herokuapp.com/updateProduct/${id}`, data)
             .then(res => {
                 if (res?.data?.modifiedCount) {
@@ -36,14 +36,14 @@ const UpdateProductFrom = () => {
     }
     return (
         <div className=' h-screen update-form-bg'>
-            <h1 className='text-yellow-400  text-center fw-bold underline uppercase py-11'>Update Product</h1>
+            <h1 className='text-yellow-400  text-center fw-bold underline uppercase py-11'>Update Products</h1>
             <div className='col-lg-6'>
                 <div>
 
                 </div>
             </div>
 
-            <div className='container-fluid p-0 col-lg-6 bg-white card card-body p-3 shadow-2xl'>
+            <div className='container-fluid col-lg-6 bg-white card card-body p-3 shadow-2xl'>
                 <form onSubmit={handleSubmit(update)}>
 
                     <input className="form-control rounded-pill " {...register('title', { required: true })} placeholder="Title" defaultValue={title} /> <br />

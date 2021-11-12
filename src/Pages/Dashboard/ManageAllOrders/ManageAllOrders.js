@@ -8,7 +8,7 @@ import { TableRow, TableCell, TableBody } from '@mui/material';
 import ManageALlOrder from './ManageAllOrder/ManageALlOrder';
 
 
-
+// fetch all order =========================
 
 
 const ManageAllOrders = () => {
@@ -38,14 +38,12 @@ const ManageAllOrders = () => {
 
 
 
-
+    // handle set status ==========================
 
     const handleSetStatus = (status, statusId) => {
 
         const newData = { status }
         newData.color = 'rgb(34, 253, 0)'
-        console.log(newData, statusId)
-
         fetch(`https://evening-woodland-47343.herokuapp.com/statusUpdate/${statusId}`, {
             method: "PUT",
             headers: {
@@ -56,9 +54,9 @@ const ManageAllOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
+
                 if (data.modifiedCount) {
-                    // setSuccess(true)
+
                     fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
                         .then(res => res.json())
                         .then(data => setProducts(data))
@@ -91,6 +89,7 @@ const ManageAllOrders = () => {
                         {products.map((product) =>
 
                             <ManageALlOrder
+                                key={product._id}
                                 product={product}
                                 handleSetStatus={handleSetStatus}
                                 handleDelete={handleDelete}

@@ -2,7 +2,7 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Button, Container, LinearProgress, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import './Product.css'
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
@@ -16,11 +16,12 @@ const Products = () => {
     return (
         <Box className='product-container '>
             <Navigation />
-            {products?.length === 0 && <LinearProgress color="secondary" />}
+
             <Container className='py-11'>
+
                 <Typography color="secondary" className=' fw-bold underline text-center my-5' variant='h4'>Products  {products?.length}</Typography>
-                <Typography className=' text-yellow-500 pb-10' variant='h5'>
-                    Unique Porcelain Collection
+                <Typography className=' text-red-600 uppercase underline fw-bold pb-10' variant='h5'>
+                    Unique Clock Collection
                 </Typography>
                 <Box className="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
                     {
@@ -28,7 +29,7 @@ const Products = () => {
                             <Box
                                 key={product?._id} className="col ">
                                 <Box className="card h-100 ">
-                                    <Box sx={{ height: 265, overflow: 'hidden' }}>
+                                    <Box sx={{ overflow: 'hidden' }}>
                                         <img className='img-fluid' src={product?.img} alt="..." />
                                     </Box>
                                     <Box className="card-body">

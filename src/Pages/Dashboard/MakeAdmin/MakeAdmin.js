@@ -21,7 +21,7 @@ const MakeAdmin = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+
                 if (data.modifiedCount) {
                     setSuccess(true)
                 }
@@ -50,6 +50,9 @@ const MakeAdmin = () => {
                         <Button sx={{ width: 1, mt: 5 }} color="secondary" type='submit' variant='contained' >Add Admin</Button>
 
                     </form>
+                </Box>
+                <Box className='col-lg-6'>
+                    <img className='img-fluid' src="https://i.ibb.co/6wczVJp/login-img.png" alt="" />
                 </Box>
             </Box>
         </div>

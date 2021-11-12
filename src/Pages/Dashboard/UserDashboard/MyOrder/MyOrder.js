@@ -13,7 +13,7 @@ const MyOrder = () => {
             .then(data => setProducts(data))
     }, [user?.email])
 
-    console.log(products)
+
     const handleMyOrderDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
             axios.delete(`https://evening-woodland-47343.herokuapp.com/myOrderDelete/${id}`)
@@ -24,7 +24,7 @@ const MyOrder = () => {
                 )
 
     }
-    console.log(products)
+
     return (
         <div >
 

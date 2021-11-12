@@ -35,10 +35,10 @@ const Review = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                // if (data.modifiedCount) {
-                setSuccess(true)
-                // }
+
+                if (data.insertedId) {
+                    setSuccess(true)
+                }
             })
 
         e.preventDefault();

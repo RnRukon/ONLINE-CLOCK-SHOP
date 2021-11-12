@@ -18,10 +18,10 @@ const Login = () => {
     }
 
     const handleLoginSubmit = (e) => {
-        // console.log(loginData)
+
         loginUser(loginData.email, loginData.password, location, history)
         e.preventDefault()
-        // e.target.reset();
+        e.target.reset();
     }
     return (
         <Grid sx={{ mt: 12 }}>

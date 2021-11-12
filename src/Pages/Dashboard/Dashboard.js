@@ -19,7 +19,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import useAuth from '../../Hooks/useAuth';
 import AdminRoute from './AdminRoute/AdminRoute';
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch, useLocation } from "react-router-dom";
 import AddedProduct from './AddedProduct/AddedProduct';
 import MyOrder from './UserDashboard/MyOrder/MyOrder';
 import ManageAllOrders from './ManageAllOrders/ManageAllOrders';
@@ -27,46 +27,57 @@ import UpdateProduct from './UpdateProduct/UpdateProduct';
 import UpdateProductFrom from './UpdateProduct/UpdateProductFrom/UpdateProductFrom';
 import Review from './UserDashboard/Review/Review';
 import Pay from './UserDashboard/Pay/Pay';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import PaymentIcon from '@mui/icons-material/Payment';
+import PreviewIcon from '@mui/icons-material/Preview';
+import LogoutIcon from '@mui/icons-material/Logout';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { admin, logOut } = useAuth();
+    const { admin, logOut, user } = useAuth();
     const dashboard = () => {
         setMobileOpen(!mobileOpen);
     };
     let { path, url } = useRouteMatch();
+
+    const location = useLocation().pathname;
+
     const drawer = (
         <div>
+
+            <ListItem button>
+                <AccountCircleIcon className=' text-pink-700' /> <Typography variant="h6" className=' text-pink-700'>{user.displayName}</Typography>
+            </ListItem>
             <Toolbar />
-
-
             <Divider />
             <Link to='/' className="text-decoration-none"> <ListItem button>
                 <HomeIcon />Go to Home
             </ListItem>
             </Link>
             <List>
-                <Link to={`${url}`} className="text-decoration-none">
-                    <ListItem button>
-                        <HomeIcon />MY Order
-                    </ListItem>
-                </Link>
-                <Link to={`${url}/pay`} className="text-decoration-none">
-                    <ListItem button>
-                        <HomeIcon />Pay
-                    </ListItem>
-                </Link>
-                <Link to={`${url}/review`} className="text-decoration-none">
-                    <ListItem button>
-                        <HomeIcon />Review
-                    </ListItem>
-                </Link>
+                {!admin && <Box>
+                    <Link to={`${url}`} className="text-decoration-none">
+                        <ListItem button>
+                            <ProductionQuantityLimitsIcon />MY Order
+                        </ListItem>
+                    </Link>
+                    <Link to={`${url}/pay`} className="text-decoration-none">
+                        <ListItem button>
+                            <PaymentIcon />Pay
+                        </ListItem>
+                    </Link>
+                    <Link to={`${url}/review`} className="text-decoration-none">
+                        <ListItem button>
+                            <PreviewIcon />Review
+                        </ListItem>
+                    </Link>
+                </Box>}
 
                 {admin && <Box>
-                    <Link to={`${url}/manageAllOrders`} className="text-decoration-none">
+                    <Link to={`${url}`} className="text-decoration-none">
                         <ListItem button>
                             <AdminPanelSettingsIcon />   Manage All Orders
                         </ListItem>
@@ -84,7 +95,7 @@ function ResponsiveDrawer(props) {
                     </Link>
                     <Link to={`${url}/addedProduct`} className="text-decoration-none">
                         <ListItem button>
-                            <AddPhotoAlternateIcon />  Add a Product
+                            <LogoutIcon />  Add a Product
                         </ListItem>
                     </Link>
                 </Box>}
@@ -111,6 +122,7 @@ function ResponsiveDrawer(props) {
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
+                    display: 'flex'
                 }}
             >
                 <Toolbar>
@@ -123,10 +135,18 @@ function ResponsiveDrawer(props) {
                     >
                         <MenuIcon />
                     </IconButton>
+
                     <Typography variant="h6" noWrap component="div">
-                        Dashboard
+
+                        {location === '/'
+                            ? ' Dashboard'
+                            : location.toUpperCase().replace('/', '')}
+
                     </Typography>
+
+
                 </Toolbar>
+
             </AppBar>
             <Box
                 component="nav"
@@ -172,18 +192,18 @@ function ResponsiveDrawer(props) {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={path}>
+                    {!admin && <Route exact path={path}>
                         <MyOrder></MyOrder>
-                    </Route>
+                    </Route>}
+                    {admin && <Route exact path={path}>
+                        <ManageAllOrders></ManageAllOrders>
+                    </Route>}
                     <Route path={`${path}/pay`}>
                         <Pay></Pay>
                     </Route>
                     <Route path={`${path}/review`}>
                         <Review></Review>
                     </Route>
-                    <AdminRoute path={`${path}/manageAllOrders`}>
-                        <ManageAllOrders></ManageAllOrders>
-                    </AdminRoute>
                     <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>
                     </AdminRoute>

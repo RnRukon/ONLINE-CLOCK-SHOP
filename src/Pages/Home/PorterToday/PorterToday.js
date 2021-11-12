@@ -28,10 +28,13 @@ const PorterToday = () => {
 
     return (
         <Box className='PorterToday-bg  py-44'>
-            <Container className='d-flex justify-content-center'>
-                <Box className='text-center bg-gray-900 p-2'>
+            <Container className='d-flex justify-content-center '>
+                <Box className='text-center bg-gray-900 p-5'>
+                    <Box className='d-flex'>
+                        <img className='w-20 text-center m-auto' src="https://i.ibb.co/HxBh7Vn/5a914c1cb15d5c051b3690af.png" alt="" />
+                    </Box>
                     <Typography className='py-6 text-yellow-500 fw-bold' variant='h4'>CLock</Typography>
-                    <Typography className='py-11 text-pink-600' variant='h3'>Become a Request Today!</Typography>
+                    <Typography className=' text-pink-600' variant='h4'>Become a Request Today!</Typography>
 
                     <Button onClick={handleOpen} className='my-11 ' variant='contained' color="secondary">Send Request</Button>
                 </Box>
