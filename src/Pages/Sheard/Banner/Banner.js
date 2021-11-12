@@ -13,7 +13,7 @@ const Banner = () => {
                     alt="First slide"
                 />
                 <Carousel.Caption className='bg-gray-900'>
-                    <h3 className=" text-pink-600 text-4xl fw-bold"> Clock Online Shop</h3>
+                    <h3 className="  fw-bold"> Clock Online Shop</h3>
                     <p> Clock Online Shop</p>
                     <Link to="/products"> <Button color="secondary" size="small" variant="contained">Explore </Button></Link>
                 </Carousel.Caption>

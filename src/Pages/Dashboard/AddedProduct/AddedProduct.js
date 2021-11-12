@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle, Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
+import { Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import useAuth from '../../../Hooks/useAuth';
 
 
 const AddedProduct = () => {
     const [productData, setProductData] = useState({});
-    const [success, setSuccess] = useState(false);
     const { isLoading } = useAuth();
 
 
@@ -32,16 +31,16 @@ const AddedProduct = () => {
             .then(data => {
                 console.log(data)
                 alert('Added product success')
-                // if (data.modifiedCount) {
-                //     setSuccess(true)
-                // }
+                if (data.modifiedCount) {
+                    alert('Added Product success')
+                }
             })
 
         e.preventDefault();
         e.target.reset();
     }
     return (
-        <div>
+        <div style={{ height: '100vh' }}>
             <Typography variant='h4'>
                 ADD A PRODUCT
             </Typography>
@@ -99,12 +98,6 @@ const AddedProduct = () => {
                         </form>
                 }
 
-                {
-                    success && <Alert severity="success">
-                        <AlertTitle>Error</AlertTitle>
-                        <strong>Added Product success</strong>
-                    </Alert>
-                }
 
             </Grid>
         </div>

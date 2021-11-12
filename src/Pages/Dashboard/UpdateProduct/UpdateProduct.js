@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, Container, Typography, CardActionArea, CardActions } from '@mui/material';
+import { Button, Box, CardActions } from '@mui/material';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 const UpdateProduct = () => {

@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 
 const Footer = () => {
     return (
-        <div className=" bg-gray-900 text-white">
-            <div className='container py-11'>
+        <div className=" bg-black text-white">
+            <div className='container py-20'>
                 <div className='row '>
                     <div className='col-lg-4 col-md-6 col-sm-12'>
                         <Typography variant='h4' color='secondary'>Contact informations</Typography>

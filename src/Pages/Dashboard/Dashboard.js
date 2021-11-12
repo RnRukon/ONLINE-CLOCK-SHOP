@@ -10,16 +10,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import DashboardHome from './DashboardHome/DashboardHome';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import useAuth from '../../Hooks/useAuth';
 import AdminRoute from './AdminRoute/AdminRoute';
@@ -110,7 +106,7 @@ function ResponsiveDrawer(props) {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar
-                color="secondary"
+
                 position="fixed"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },

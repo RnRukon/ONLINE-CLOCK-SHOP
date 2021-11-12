@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../Hooks/useAuth';
-import { Button, Box, Container, Typography, CardActionArea, CardActions } from '@mui/material';
-import { typography } from '@mui/system';
+import { Button, Box, CardActions } from '@mui/material';
 import './MyOrder.css'
-// import axios from 'axios';
+
 const MyOrder = () => {
     const { user } = useAuth();
     const [products, setProducts] = useState([])
@@ -27,10 +26,17 @@ const MyOrder = () => {
     }
     console.log(products)
     return (
-        <div className='myOrder-Container'>
-            <h1 className='text-yellow-300  text-center'>My Order {products?.length} </h1>
-            <h4 className='text-green-50 text-center'>Please come and order</h4>
+        <div >
+
+            <h1 className=' text-pink-600 text-center'>My Order {products?.length} </h1>
+            <h4 className=' text-pink-800 text-center'>Please come and order</h4>
+
+            {
+                products?.length === 0 && <img src="https://i.ibb.co/tq9K32W/Helium-10-xray.jpg" alt="" />
+            }
             <div class="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
+
+
                 {
                     products?.map(product => <div key={product?._id} class="col ">
 
@@ -39,7 +45,7 @@ const MyOrder = () => {
                         <Box class="card h-100">
 
 
-                            <Box sx={{ height: 150, overflow: 'hidden' }}>
+                            <Box sx={{ height: 290, overflow: 'hidden' }}>
                                 <img className='img-fluid' src={product?.img} class="card-img-top" alt="..." />
                             </Box>
                             <div class="card-body">

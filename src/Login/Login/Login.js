@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle, Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Button, Grid, TextField } from '@mui/material';
 import useAuth from '../../Hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 import LoginIcon from '@mui/icons-material/Login';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { loginUser, isLoading, authError } = useAuth();
+    const { loginUser, authError } = useAuth();
     const location = useLocation();
     const history = useHistory()
     const login = (e) => {

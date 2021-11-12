@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, AlertTitle, Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import useAuth from '../../../../Hooks/useAuth';
-import { Box, width } from '@mui/system';
+import { Box } from '@mui/system';
 const Review = () => {
     const [reviewData, setReviewData] = useState({});
     const [success, setSuccess] = useState(false);
@@ -79,7 +79,7 @@ const Review = () => {
                                     onBlur={handleOnBlur}
                                 /> <br />
 
-                                <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Add a Product</Button>
+                                <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Review</Button>
                             </form>
                     }
 
@@ -90,6 +90,9 @@ const Review = () => {
                         </Alert>
                     }
 
+                </Grid>
+                <Grid className="col-lg-6">
+                    <img src="https://i.ibb.co/vcgtgKr/2560px-Intro-img-svg.png" alt="" />
                 </Grid>
             </Box>
         </div>

@@ -1,17 +1,12 @@
-
 import React, { useEffect, useState } from 'react';
-
-import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-// import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
 import { Paper, Typography } from '@mui/material';
 import './ReviewPost.css'
-import { typography } from '@mui/system';
+
 const ReviewPost = () => {
     const [reviews, setReviews] = useState([]) || '';
 
