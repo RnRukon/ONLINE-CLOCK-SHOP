@@ -7,16 +7,16 @@ const HomeProduct = ({ product }) => {
     const { title, description, img, _id, price } = product
 
     return (
-        <Box class="col ">
-            <Box class="card h-100 ">
+        <Box className="col ">
+            <Box className="card h-100 ">
                 <Box sx={{ height: 365, overflow: 'hidden' }}>
-                    <img className='img-fluid' src={img} class="card-img-top" alt="..." />
+                    <img className='img-fluid' src={img} alt="..." />
                 </Box>
-                <Box class="card-body">
-                    <Typography variant="h5" class="card-title">{title}</Typography>
-                    <Typography variant="body2" class="card-text">{description}</Typography>
+                <Box className="card-body">
+                    <Typography variant="h5" className="card-title">{title}</Typography>
+                    <Typography variant="body2" className="card-text">{description}</Typography>
                 </Box>
-                <Box class="card-footer d-flex justify-content-between">
+                <Box className="card-footer d-flex justify-content-between">
                     <Link to={`placeOrder/${_id}`}>
                         <Button color="secondary" variant="contained">Order now</Button>
                     </Link>

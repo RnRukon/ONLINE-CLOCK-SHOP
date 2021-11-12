@@ -4,18 +4,16 @@ import Table from '@mui/material/Table';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-import { Button, TableRow, TableCell, TableBody } from '@mui/material';
+import { TableRow, TableCell, TableBody } from '@mui/material';
+import ManageALlOrder from './ManageAllOrder/ManageALlOrder';
 
 
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 
 const ManageAllOrders = () => {
     const [products, setProducts] = useState([]);
-    const [orderId, setOrderId] = useState("");
+
     useEffect(() => {
         fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
             .then(res => res.json())
@@ -39,21 +37,16 @@ const ManageAllOrders = () => {
 
 
 
-    const handleIdChange = (setId) => {
-        setOrderId(setId)
-        console.log(orderId)
-    }
 
 
-    const handleChange = (event) => {
-        // console.log(event?.props?.children);
-        const status = event.target.value;
+
+    const handleSetStatus = (status, statusId) => {
 
         const newData = { status }
         newData.color = 'rgb(34, 253, 0)'
-        console.log(newData)
+        console.log(newData, statusId)
 
-        fetch(`https://evening-woodland-47343.herokuapp.com/statusUpdate/${orderId}`, {
+        fetch(`https://evening-woodland-47343.herokuapp.com/statusUpdate/${statusId}`, {
             method: "PUT",
             headers: {
 
@@ -95,70 +88,22 @@ const ManageAllOrders = () => {
                     </TableHead>
                     <TableBody>
 
-                        {products.map((product) => (
+                        {products.map((product) =>
 
+                            <ManageALlOrder
+                                product={product}
+                                handleSetStatus={handleSetStatus}
+                                handleDelete={handleDelete}
 
-                            <TableRow
+                            ></ManageALlOrder>
 
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-
-                            >
-                                <TableCell component="th" scope="row">
-                                    {product?.name}
-                                </TableCell>
-                                <TableCell align="center">{product?.email}</TableCell>
-                                <TableCell align="center">{product?.date}</TableCell>
-                                <TableCell align="center">{product?.title}</TableCell>
-                                <TableCell align="center">{product?.price}</TableCell>
-                                <TableCell align="center">
-                                    <FormControl onClick={() => handleIdChange(product._id)} sx={{ m: 1, minWidth: 80 }}>
-                                        <InputLabel id="demo-simple-select-autowidth-label">Action</InputLabel>
-
-                                        <Select
-                                            onClick={() => handleIdChange(product._id)}
-                                            labelId="demo-simple-select-autowidth-label"
-                                            id="demo-simple-select-autowidth"
-                                            defaultValue={product.status}
-                                            onChange={handleChange}
-                                            autoWidth
-                                            label={product.status}
-
-                                        >
-
-                                            <MenuItem onClick={() => handleIdChange(product._id)} value="Rejected">Rejected</MenuItem>
-                                            <MenuItem onClick={() => handleIdChange(product._id)} value="Shipped">Shipped</MenuItem>
-
-                                        </Select>
-                                    </FormControl>
-                                </TableCell>
-                                <TableCell align="center">
-
-                                    <Button onClick={() => handleDelete(product?._id)}
-                                        variant="contained"
-                                        color='error'
-                                        sx={{ p: 0, }}
-                                    >delete</Button>
-                                </TableCell>
-
-                            </TableRow>
-
-                        ))}
+                        )}
 
                     </TableBody>
                 </Table>
             </TableContainer>
 
 
-            {/* {
-                products.map(product => <ManageALlOrder
-                    key={product._id}
-                    product={product}
-                    handleDelete={handleDelete}
-                    handleUpdateStatus={handleUpdateStatus}
-                    setIsStatus={setIsStatus}
-
-                ></ManageALlOrder>)
-            } */}
         </div>
     );
 };

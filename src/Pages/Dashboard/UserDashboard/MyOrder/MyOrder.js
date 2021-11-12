@@ -34,29 +34,29 @@ const MyOrder = () => {
             {
                 products?.length === 0 && <img src="https://i.ibb.co/tq9K32W/Helium-10-xray.jpg" alt="" />
             }
-            <div class="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
+            <div className="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
 
 
                 {
-                    products?.map(product => <div key={product?._id} class="col ">
+                    products?.map(product => <div key={product?._id} className="col ">
 
 
 
-                        <Box class="card h-100">
+                        <Box className="card h-100">
 
 
                             <Box sx={{ height: 290, overflow: 'hidden' }}>
-                                <img className='img-fluid' src={product?.img} class="card-img-top" alt="..." />
+                                <img className='img-fluid' src={product?.img} alt="..." />
                             </Box>
-                            <div class="card-body">
-                                <h5 class="card-title">{product?.title}</h5>
-                                <p class="card-text">{product?.description}</p>
+                            <div className="card-body">
+                                <h5 className="card-title">{product?.title}</h5>
+                                <p className="card-text">{product?.description}</p>
                                 <typography>
                                     ${product?.price}
                                 </typography>
                             </div>
 
-                            <CardActions class="card-footer d-flex justify-content-between">
+                            <CardActions className="card-footer d-flex justify-content-between">
                                 <Button sx={{ width: 100, p: 0 }} onClick={() => handleMyOrderDelete(product._id)}>Delete</Button>
                                 <Button sx={{ width: 100, p: 0 }} style={{ backgroundColor: `${product?.color}` }}>{product.status}</Button>
                             </CardActions>
