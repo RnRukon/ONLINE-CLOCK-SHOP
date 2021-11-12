@@ -15,7 +15,7 @@ const PlaceOrder = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/placeProducts/${id}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/placeProducts/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])
@@ -41,7 +41,7 @@ const PlaceOrder = () => {
 
         const addToCartProduct = { title, description, img, price, email, name, date, status, color };
 
-        fetch('http://localhost:5000/addToCartProduct', {
+        fetch('https://evening-woodland-47343.herokuapp.com/addToCartProduct', {
             method: "POST",
             headers: {
 

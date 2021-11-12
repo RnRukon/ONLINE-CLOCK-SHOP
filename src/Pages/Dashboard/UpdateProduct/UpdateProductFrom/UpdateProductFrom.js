@@ -10,7 +10,7 @@ const UpdateProductFrom = () => {
     const { register, handleSubmit, reset } = useForm();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/placeProducts/${id}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/placeProducts/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])
@@ -25,7 +25,7 @@ const UpdateProductFrom = () => {
 
     const update = (data) => {
         console.log(data)
-        axios.put(`http://localhost:5000/updateProduct/${id}`, data)
+        axios.put(`https://evening-woodland-47343.herokuapp.com/updateProduct/${id}`, data)
             .then(res => {
                 if (res?.data?.modifiedCount) {
                     alert('Update SuccessFully')

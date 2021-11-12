@@ -1,19 +1,22 @@
-import { Container, Typography } from '@mui/material';
+import { Container, LinearProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import useAuth from '../../../Hooks/useAuth';
 import './HomeProduct.css'
 import HomeProduct from './HomeProduct/HomeProduct';
 
 
 const HomeProducts = () => {
     const [products, setProduces] = useState([]);
+
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://evening-woodland-47343.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProduces(data))
     }, [])
     return (
         <Box className="home-product-container pb-20">
+            {products?.length === 0 && <LinearProgress color="secondary" />}
             <Container>
 
                 <Typography className=' underline uppercase shadow-inner text-yellow-300' variant='h4' sx={{ py: 5, textAlign: 'center', fontWeight: 'bold' }}>

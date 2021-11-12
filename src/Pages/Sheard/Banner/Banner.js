@@ -21,7 +21,7 @@ const Banner = () => {
             <Carousel.Item interval={500}>
                 <img
                     className="d-block"
-                    src="https://i.ibb.co/p00bzKJ/wp7491739.jpg"
+                    src="https://www.teahub.io/photos/full/227-2276656_time-travel-background-clock-travelling-to-time.png"
                     alt="Second slide"
                 />
                 <Carousel.Caption className='bg-gray-900'>

@@ -9,7 +9,7 @@ const UpdateProduct = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://evening-woodland-47343.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setUpdateData(data) || '')
     }, [])
@@ -18,9 +18,9 @@ const UpdateProduct = () => {
 
     const handleProductDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`http://localhost:5000/productDelete/${id}`)
+            axios.delete(`https://evening-woodland-47343.herokuapp.com/productDelete/${id}`)
                 .then(res => res.data.deletedCount &&
-                    fetch('http://localhost:5000/products')
+                    fetch('https://evening-woodland-47343.herokuapp.com/products')
                         .then(res => res.json())
                         .then(data => setUpdateData(data) || '')
                 )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import useAuth from '../../../Hooks/useAuth';
+import { Box } from '@mui/system';
 
 
 const AddedProduct = () => {
@@ -19,7 +20,7 @@ const AddedProduct = () => {
 
     const handleAddAProduct = (e) => {
 
-        fetch('http://localhost:5000/addedProduct', {
+        fetch('https://evening-woodland-47343.herokuapp.com/addedProduct', {
             method: "POST",
             headers: {
 
@@ -41,65 +42,70 @@ const AddedProduct = () => {
     }
     return (
         <div style={{ height: '100vh' }}>
-            <Typography variant='h4'>
+            <Typography variant='h4' className='text-pink-600'>
                 ADD A PRODUCT
             </Typography>
 
-            <Grid >
-                {
-                    isLoading ? <LinearProgress /> :
-                        <form onSubmit={handleAddAProduct}>
-                            <TextField
-                                sx={{ width: 1 }}
-                                required
-                                id="standard-name-input"
-                                label="Product Title"
-                                type="text"
-                                name="title"
-                                variant="standard"
-                                onBlur={handleOnBlur}
-                                color="warning"
-                            /> <br />
-                            <TextField
-                                sx={{ width: 1 }}
-                                required
-                                id="standard-text-input"
-                                label="Description"
-                                type="text"
-                                name="description"
-                                variant="standard"
-                                onBlur={handleOnBlur}
-                                color="warning"
-                            /> <br />
-                            <TextField
-                                sx={{ width: 1 }}
-                                required
-                                id="standard-text-input"
-                                label="IMG URL"
-                                type="text"
-                                name="img"
-                                variant="standard"
-                                onBlur={handleOnBlur}
-                                color="warning"
-                            /> <br />
-                            <TextField
-                                sx={{ width: 1 }}
-                                required
-                                id="standard-number-input"
-                                label="price"
-                                type="number"
-                                name="price"
-                                variant="standard"
-                                onBlur={handleOnBlur}
-                                color="warning"
-                            />
+            <Box className='row'>
+                <Grid className='col-lg-5 mt-lg-5'>
+                    {
+                        isLoading ? <LinearProgress /> :
+                            <form onSubmit={handleAddAProduct}>
+                                <TextField
+                                    sx={{ width: 1 }}
+                                    required
+                                    id="standard-name-input"
+                                    label="Product Title"
+                                    type="text"
+                                    name="title"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                    color="warning"
+                                /> <br />
+                                <TextField
+                                    sx={{ width: 1 }}
+                                    required
+                                    id="standard-text-input"
+                                    label="Description"
+                                    type="text"
+                                    name="description"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                    color="warning"
+                                /> <br />
+                                <TextField
+                                    sx={{ width: 1 }}
+                                    required
+                                    id="standard-text-input"
+                                    label="IMG URL"
+                                    type="text"
+                                    name="img"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                    color="warning"
+                                /> <br />
+                                <TextField
+                                    sx={{ width: 1 }}
+                                    required
+                                    id="standard-number-input"
+                                    label="price"
+                                    type="number"
+                                    name="price"
+                                    variant="standard"
+                                    onBlur={handleOnBlur}
+                                    color="warning"
+                                />
 
-                            <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Add a Product</Button>
-                        </form>
-                }
+                                <Button sx={{ width: 1, mt: 5 }} color='error' type="submit" className="feature-button" variant="contained">Add a Product</Button>
+                            </form>
+                    }
 
 
-            </Grid>
+                </Grid>
+                <Grid className="col-lg-7">
+                    <img src="https://i2.wp.com/files.123freevectors.com/wp-content/uploads/new/objects/407-free-clock-vector-illustrator.png" alt="" />
+                </Grid>
+            </Box>
         </div>
     );
 };

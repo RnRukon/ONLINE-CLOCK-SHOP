@@ -2,20 +2,21 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, LinearProgress, Typography } from '@mui/material';
 import './Product.css'
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
     const [products, setProducts] = useState([]) || '';
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://evening-woodland-47343.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [setProducts])
     return (
         <Box className='product-container '>
             <Navigation />
+            {products?.length === 0 && <LinearProgress color="secondary" />}
             <Container className='py-11'>
                 <Typography color="secondary" className=' fw-bold underline text-center my-5' variant='h4'>Products  {products?.length}</Typography>
                 <Typography className=' text-yellow-500 pb-10' variant='h5'>

@@ -17,7 +17,7 @@ const ManageAllOrders = () => {
     const [products, setProducts] = useState([]);
     const [orderId, setOrderId] = useState("");
     useEffect(() => {
-        fetch('http://localhost:5000/allOrder')
+        fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -27,10 +27,10 @@ const ManageAllOrders = () => {
 
     const handleDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`http://localhost:5000/manageAllOrderDelete/${id}`)
+            axios.delete(`https://evening-woodland-47343.herokuapp.com/manageAllOrderDelete/${id}`)
 
                 .then(res => res.data.deletedCount &&
-                    fetch('http://localhost:5000/allOrder')
+                    fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
                         .then(res => res.json())
                         .then(data => setProducts(data))
                 )
@@ -53,7 +53,7 @@ const ManageAllOrders = () => {
         newData.color = 'rgb(34, 253, 0)'
         console.log(newData)
 
-        fetch(`http://localhost:5000/statusUpdate/${orderId}`, {
+        fetch(`https://evening-woodland-47343.herokuapp.com/statusUpdate/${orderId}`, {
             method: "PUT",
             headers: {
 
@@ -66,7 +66,7 @@ const ManageAllOrders = () => {
                 // console.log(data)
                 if (data.modifiedCount) {
                     // setSuccess(true)
-                    fetch('http://localhost:5000/allOrder')
+                    fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
                         .then(res => res.json())
                         .then(data => setProducts(data))
                 }

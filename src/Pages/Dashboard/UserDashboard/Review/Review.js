@@ -25,7 +25,7 @@ const Review = () => {
         if (reviewData.rating > 5) {
             return alert('Please Type the maximum rating 5');
         }
-        fetch('http://localhost:5000/review', {
+        fetch('https://evening-woodland-47343.herokuapp.com/review', {
             method: "POST",
             headers: {
 
