@@ -6,13 +6,20 @@ import Navigation from '../../../../Sheard/Navigation/Navigation';
 import { Button, Box, Container, Grid, Typography, Divider } from '@mui/material';
 import './PlaceOrder.css'
 
+import Stack from "@mui/material/Stack";
 
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const PlaceOrder = () => {
     const [product, setProduct] = useState({}) || '';
     const { id } = useParams();
     const { user } = useAuth();
-
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         fetch(`https://evening-woodland-47343.herokuapp.com/placeProducts/${id}`)
@@ -52,7 +59,8 @@ const PlaceOrder = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Your add to cart success')
+
+                    setOpen(true);
 
                 }
 
@@ -61,7 +69,13 @@ const PlaceOrder = () => {
     }
 
 
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
 
+        setOpen(false);
+    };
 
     return (
         <Box className='placeOrder-container'>
@@ -104,6 +118,14 @@ const PlaceOrder = () => {
 
 
                     </Grid>
+                    <Stack spacing={2} sx={{ width: "100%" }}>
+
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+                                Your add to cart success!
+                            </Alert>
+                        </Snackbar>
+                    </Stack>
                 </Box>
             </Container>
         </Box>

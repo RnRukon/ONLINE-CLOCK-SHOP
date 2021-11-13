@@ -4,9 +4,18 @@ import useAuth from '../../../../Hooks/useAuth';
 import { Button, Box, CardActions } from '@mui/material';
 import './MyOrder.css'
 
+import Stack from "@mui/material/Stack";
+
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const MyOrder = () => {
     const { user } = useAuth();
     const [products, setProducts] = useState([])
+    const [open, setOpen] = React.useState(false);
     useEffect(() => {
         fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
             .then(res => res.json())
@@ -17,13 +26,25 @@ const MyOrder = () => {
     const handleMyOrderDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
             axios.delete(`https://evening-woodland-47343.herokuapp.com/myOrderDelete/${id}`)
-                .then(res => res.data.deletedCount &&
-                    fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
-                        .then(res => res.json())
-                        .then(data => setProducts(data))
-                )
+                .then(res => {
 
+                    res.data.deletedCount &&
+                        fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
+                            .then(res => res.json())
+                            .then(data => setProducts(data))
+                }
+
+                )
+        setOpen(true)
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     return (
         <div >
@@ -63,6 +84,14 @@ const MyOrder = () => {
 
 
                         </Box>
+                        <Stack spacing={2} sx={{ width: "100%" }}>
+
+                            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+                                    Delete success!
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
 
                     </div>)
                 }
