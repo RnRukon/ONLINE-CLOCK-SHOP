@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle, Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
+import { Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import useAuth from '../../../../Hooks/useAuth';
 import { Box } from '@mui/system';
+
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Review = () => {
     const [reviewData, setReviewData] = useState({});
-    const [success, setSuccess] = useState(false);
+    const [open, setOpen] = React.useState(false);
     const { isLoading, user } = useAuth();
 
 
@@ -37,13 +45,22 @@ const Review = () => {
             .then(data => {
 
                 if (data.insertedId) {
-                    setSuccess(true)
+                    setOpen(true);
                 }
             })
 
         e.preventDefault();
         e.target.reset();
     }
+
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpen(false);
+    };
     return (
         <div>
             <Typography color="secondary" variant='h4'>
@@ -83,12 +100,14 @@ const Review = () => {
                             </form>
                     }
 
-                    {
-                        success && <Alert severity="success">
-                            <AlertTitle>Review</AlertTitle>
-                            <strong>your Review success</strong>
-                        </Alert>
-                    }
+                    <Stack spacing={2} sx={{ width: "100%" }}>
+
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+                                Add a review success!
+                            </Alert>
+                        </Snackbar>
+                    </Stack>
 
                 </Grid>
                 <Grid className="col-lg-6">

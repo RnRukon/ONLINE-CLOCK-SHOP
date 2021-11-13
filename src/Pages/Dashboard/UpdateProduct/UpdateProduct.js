@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Button, Box, CardActions } from '@mui/material';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const UpdateProduct = () => {
 
 
     const [updateData, setUpdateData] = useState([])
-
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         fetch('https://evening-woodland-47343.herokuapp.com/products')
@@ -23,9 +31,23 @@ const UpdateProduct = () => {
                     fetch('https://evening-woodland-47343.herokuapp.com/products')
                         .then(res => res.json())
                         .then(data => setUpdateData(data) || '')
+                        .finally(() => {
+                            setOpen(true);
+                        })
                 )
 
+
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+
 
     return (
         <div>
@@ -56,6 +78,15 @@ const UpdateProduct = () => {
                         </div>)
                 }
             </div>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Delete success!
+                    </Alert>
+                </Snackbar>
+
+            </Stack>
 
         </div >
     );

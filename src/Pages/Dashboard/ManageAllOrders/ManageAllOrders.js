@@ -7,13 +7,21 @@ import Paper from '@mui/material/Paper';
 import { TableRow, TableCell, TableBody } from '@mui/material';
 import ManageALlOrder from './ManageAllOrder/ManageALlOrder';
 
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 // fetch all order =========================
 
 
 const ManageAllOrders = () => {
     const [products, setProducts] = useState([]);
-
+    const [open, setOpen] = React.useState(false);
     useEffect(() => {
         fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
             .then(res => res.json())
@@ -22,6 +30,7 @@ const ManageAllOrders = () => {
 
 
     // delete order Products ==================================
+
 
     const handleDelete = (id) => {
         window.confirm("Are you sure you wish to delete this item?") &&
@@ -32,9 +41,16 @@ const ManageAllOrders = () => {
                         .then(res => res.json())
                         .then(data => setProducts(data))
                 )
+        setOpen(true);
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
+        setOpen(false);
+    };
 
 
 
@@ -102,7 +118,15 @@ const ManageAllOrders = () => {
                 </Table>
             </TableContainer>
 
+            <Stack spacing={2} sx={{ width: '100%' }}>
 
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Delete success!
+                    </Alert>
+                </Snackbar>
+
+            </Stack>
         </div>
     );
 };
