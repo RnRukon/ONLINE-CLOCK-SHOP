@@ -13,6 +13,7 @@ import LoginToggle from './Login/LoginToggle/LoginToggle';
 import PlaceOrder from './Pages/Home/HomeProducts/HomeProduct/PlaceOrder/PlaceOrder';
 import Products from './Pages/Home/Products/Products';
 import PrivateRoute from './Login/LoginToggle/PrivateRoute/PrivateRoute';
+import NoteFound from './Pages/NoteFound/NoteFound';
 
 
 
@@ -22,6 +23,9 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
+            <Route exact path='/home'>
+              <Home></Home>
+            </Route>
             <Route exact path='/'>
               <Home></Home>
             </Route>
@@ -32,12 +36,15 @@ function App() {
               <PlaceOrder></PlaceOrder>
             </PrivateRoute>
 
-            <Route path='/login'>
+            <Route exact path='/login'>
               <LoginToggle></LoginToggle>
             </Route>
             <PrivateRoute path='/dashboard'>
               <Dashboard></Dashboard>
             </PrivateRoute>
+            <Route exact path='*'>
+              <NoteFound></NoteFound>
+            </Route>
           </Switch>
         </Router>
       </AuthProvider>

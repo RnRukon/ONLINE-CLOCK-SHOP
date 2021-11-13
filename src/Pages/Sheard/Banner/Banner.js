@@ -5,7 +5,7 @@ import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
-        <Carousel className="">
+        <Carousel className="mt-5">
             <Carousel.Item interval={1000}>
                 <img
                     className="d-block "

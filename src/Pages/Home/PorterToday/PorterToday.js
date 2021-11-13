@@ -26,6 +26,11 @@ const PorterToday = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleOnSubmit = (e) => {
+        e.preventDefault()
+        handleClose()
+    }
+
     return (
         <Box className='PorterToday-bg  py-44'>
             <Container className='d-flex justify-content-center '>
@@ -61,7 +66,7 @@ const PorterToday = () => {
                             Become a Potter Today!
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            <form >
+                            <form onSubmit={handleOnSubmit}>
                                 <TextField
                                     sx={{ width: 1 }}
                                     id="standard-basic"

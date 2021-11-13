@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../../../../Hooks/useAuth';
 import Navigation from '../../../../Sheard/Navigation/Navigation';
 import { Button, Box, Container, Grid, Typography, Divider } from '@mui/material';
-
+import './PlaceOrder.css'
 
 
 
@@ -64,7 +64,7 @@ const PlaceOrder = () => {
 
 
     return (
-        <Box>
+        <Box className='placeOrder-container'>
             <Navigation />
             <Container className='py-36'>
                 <Box sx={{ flexGrow: 1 }}>
@@ -88,8 +88,18 @@ const PlaceOrder = () => {
                                 </Typography>
                             </Box>
 
-                            <Button sx={{ mr: 5 }} color='secondary' onClick={handleAddToCartProduct} variant="contained" >Add to Cart</Button>
-                            <Link to='/'><Button color='warning' variant="contained"> Go to home</Button></Link>
+                            <Button sx={{ mr: 3 }} className='mt-2' color='secondary' onClick={handleAddToCartProduct} variant="contained" >Add to Cart</Button>
+                            <Link className='mr-5 ' to='/products'><Button className='mt-2' color='primary' variant="contained"> Explore</Button></Link>
+                            <Link to='/' ><Button color='warning' className='mt-2' variant="contained"> Go to home</Button></Link>
+
+
+                            <Box className='mt-5'>
+                                <Typography variant='h4' color='secondary'>Contact informations</Typography>
+                                <p className='text-yellow-500'>A: Kichijoji Sun Road 21/1, Tokyo.</p>
+                                <p>T: + 123 456 789: + 123 456 8788</p>
+                                <small>E: etruscan@qodeinteractive.com</small>
+                                <p>W: Thursday to Sunday – 12.00 – 20.00h.</p>
+                            </Box>
                         </Grid>
 
 

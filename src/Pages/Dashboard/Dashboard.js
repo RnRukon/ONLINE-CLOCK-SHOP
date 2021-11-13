@@ -198,24 +198,25 @@ function ResponsiveDrawer(props) {
                     {admin && <Route exact path={path}>
                         <ManageAllOrders></ManageAllOrders>
                     </Route>}
-                    <Route path={`${path}/pay`}>
+                    <Route exact path={`${path}/pay`}>
                         <Pay></Pay>
                     </Route>
-                    <Route path={`${path}/review`}>
+                    <Route exact path={`${path}/review`}>
                         <Review></Review>
                     </Route>
-                    <AdminRoute path={`${path}/makeAdmin`}>
+                    <AdminRoute exact path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>
                     </AdminRoute>
-                    <AdminRoute path={`${path}/updateProduct`}>
+                    <AdminRoute exact path={`${path}/updateProduct`}>
                         <UpdateProduct></UpdateProduct>
                     </AdminRoute>
-                    <AdminRoute path={`${path}/updateProductFrom/:id`}>
+                    <AdminRoute exact path={`${path}/updateProductFrom/:id`}>
                         <UpdateProductFrom></UpdateProductFrom>
                     </AdminRoute>
-                    <AdminRoute path={`${path}/addedProduct`}>
+                    <AdminRoute exact path={`${path}/addedProduct`}>
                         <AddedProduct></AddedProduct>
                     </AdminRoute>
+
                 </Switch>
             </Box>
         </Box>
