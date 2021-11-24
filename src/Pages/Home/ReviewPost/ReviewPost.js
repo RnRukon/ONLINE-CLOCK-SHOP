@@ -2,12 +2,32 @@ import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
 import { Paper, Typography } from '@mui/material';
 import './ReviewPost.css'
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
-const ReviewPost = () => {
+
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
+};
+const ReviewPost = (props) => {
     const [reviews, setReviews] = useState([]) || '';
 
     useEffect(() => {
@@ -18,28 +38,42 @@ const ReviewPost = () => {
 
 
 
-    const Grid = styled(MuiGrid)(({ theme }) => ({
-        width: '100%',
-        ...theme.typography.body2,
-        '& [role="separator"]': {
-            margin: theme.spacing(0, 1),
-        },
-    }));
+
     return (
         <Box className='review-container py-4'>
             <Container >
                 <Typography color="secondary" className='underline' variant='h4'>
                     Review
                 </Typography>
-                <Box className="py-20" sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Box sx={{ flexGrow: 1 }}>
+
+                    <Carousel
+                        responsive={responsive}
+                        className="py-20 px-1"
+                        swipeable={true}
+                        draggable={true}
+                        showDots={true}
+                        ssr={true} // means to render carousel on server-side.
+                        infinite={true}
+                        autoPlay={props.deviceType !== "mobile" ? true : false}
+                        autoPlaySpeed={2000}
+                        keyBoardControl={true}
+                        customTransition="all .5"
+                        transitionDuration={2000}
+                        containerClass="carousel-container"
+                        removeArrowOnDeviceType={["tablet", "mobile"]}
+                        deviceType={props.deviceType}
+                        dotListClass="custom-dot-list-style"
+                        itemClass="carousel-item-padding-40-px"
+
+                    >
 
                         {
                             reviews.map(review =>
 
 
-                                <Grid item xs={12} sm={4} md={4} key={review._id}>
-                                    <Paper>
+                                <Box className='m-2' key={review._id}>
+                                    <Paper className=''>
                                         <Box className="d-flex">
                                             <Box className=" ">
                                                 <Box className="border border-r-2">
@@ -69,12 +103,14 @@ const ReviewPost = () => {
                                             </Box>
                                         </Box>
                                     </Paper>
-                                </Grid>
+                                </Box>
 
 
                             )
                         }
-                    </Grid>
+                    </Carousel>;
+
+
                 </Box>
 
             </Container >

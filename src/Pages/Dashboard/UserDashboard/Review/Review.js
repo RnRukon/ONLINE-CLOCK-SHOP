@@ -2,10 +2,26 @@ import React, { useState } from 'react';
 import { Button, Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import useAuth from '../../../../Hooks/useAuth';
 import { Box } from '@mui/system';
-
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+
+
+const labels = {
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
+};
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -13,6 +29,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Review = () => {
     const [reviewData, setReviewData] = useState({});
     const [open, setOpen] = React.useState(false);
+    const [ratingValue, setRatingValue] = React.useState(2);
+    const [hover, setHover] = React.useState(-1);
     const { isLoading, user } = useAuth();
 
 
@@ -30,9 +48,8 @@ const Review = () => {
         reviewData.name = user.displayName;
         reviewData.email = user.email;
         reviewData.img = user.photoURL;
-        if (reviewData.rating > 5) {
-            return alert('Please Type the maximum rating 5');
-        }
+        reviewData.rating = ratingValue;
+
         fetch('https://evening-woodland-47343.herokuapp.com/review', {
             method: "POST",
             headers: {
@@ -84,17 +101,29 @@ const Review = () => {
                                     onBlur={handleOnBlur}
 
                                 /><br />
-                                <TextField
-                                    color="secondary"
-                                    sx={{ width: 1 }}
-                                    required
-                                    id="standard-required"
-                                    label="Rating"
-                                    variant="standard"
-                                    name="rating"
-                                    type="number"
-                                    onBlur={handleOnBlur}
-                                /> <br />
+                                <Box
+                                    sx={{
+                                        width: 200,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <Rating
+                                        name="hover-feedback"
+                                        value={ratingValue}
+                                        precision={0.5}
+                                        onChange={(event, newValue) => {
+                                            setRatingValue(newValue);
+                                        }}
+                                        onChangeActive={(event, newHover) => {
+                                            setHover(newHover);
+                                        }}
+                                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                    />
+                                    {ratingValue !== null && (
+                                        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : ratingValue]}</Box>
+                                    )}
+                                </Box> <br />
 
                                 <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Review</Button>
                             </form>

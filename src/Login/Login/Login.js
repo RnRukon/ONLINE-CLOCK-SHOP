@@ -17,10 +17,10 @@ const Login = () => {
         setLoginData(newLoginData)
     }
 
-    const handleLoginSubmit = (e) => {
-
-        loginUser(loginData.email, loginData.password, location, history)
+    const handleLoginSubmit = async (e) => {
         e.preventDefault()
+        await loginUser(loginData.email, loginData.password, location, history)
+
         e.target.reset();
     }
     return (

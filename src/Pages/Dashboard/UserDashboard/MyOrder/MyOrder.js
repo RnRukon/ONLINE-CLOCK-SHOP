@@ -49,8 +49,11 @@ const MyOrder = () => {
     return (
         <div >
 
-            <h1 className=' text-pink-600 text-center'>My Order {products?.length} </h1>
-            <h4 className=' text-pink-800 text-center'>Please come and order</h4>
+            {products?.length === 0 ?
+                <h4 className=' text-pink-800 text-center'>No order was found for you, please order first</h4>
+                :
+                <h1 className=' text-pink-600 text-center'>My Order {products?.length} </h1>
+            }
 
             {
                 products?.length === 0 && <img src="https://i.ibb.co/tq9K32W/Helium-10-xray.jpg" alt="" />

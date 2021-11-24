@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@mui/material';
+import { TextField, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import Button from '@mui/material/Button';
 
@@ -17,17 +17,22 @@ const Footer = () => {
                     <div className='col-lg-4 col-md-6 col-sm-12'>
                         <Typography variant='h4' color='secondary'>CLock Online Shop</Typography>
                         <h5 className='text-yellow-500'>Unique Clock Collection</h5>
-
+                        <Toolbar sx={{ color: 'white' }} />
                         <TextField
-                            sx={{ my: 3, backgroundColor: 'white' }}
+                            // sx={{ my: 3, backgroundColor: 'white' }}
+                            InputLabelProps={{
+                                style: { color: '#fff' },
+                            }}
+                            inputProps={{ style: { fontFamily: 'Arial', color: 'white' } }}
                             color='secondary'
                             label="Email"
                             id="standard-size-small"
                             defaultValue="Retailer@gmail.com"
                             size="small"
                             variant="standard"
+
                         />
-                        <Button sx={{ my: 4 }} color='secondary' variant='contained'>Send</Button>
+                        <Button color='secondary' variant='contained'>Send</Button>
 
                     </div>
                     <div className='col-lg-4 col-md-6 col-sm-12'>
