@@ -40,7 +40,7 @@ const ReviewPost = (props) => {
 
 
     return (
-        <Box className='review-container py-4'>
+        <Box className='review-container  py-4'>
             <Container >
                 <Typography color="secondary" className='underline' variant='h4'>
                     Review
