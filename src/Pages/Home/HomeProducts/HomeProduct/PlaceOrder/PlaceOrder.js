@@ -48,7 +48,7 @@ const PlaceOrder = () => {
 
         const addToCartProduct = { title, description, img, price, email, name, date, status, color };
 
-        fetch('https://evening-woodland-47343.herokuapp.com/init', {
+        fetch('https://evening-woodland-47343.herokuapp.com/addToCartProduct', {
             method: "POST",
             headers: {
 
@@ -58,12 +58,11 @@ const PlaceOrder = () => {
         })
             .then(res => res.json())
             .then(data => {
-                /*  if (data.insertedId) {
- 
-                     setOpen(true);
- 
-                 } */
-                window.location.replace(data)
+                if (data.insertedId) {
+
+                    setOpen(true);
+
+                }
 
             })
 
