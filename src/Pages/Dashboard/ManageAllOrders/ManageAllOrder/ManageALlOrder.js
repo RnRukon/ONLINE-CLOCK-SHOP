@@ -7,10 +7,10 @@ import { Button, TableRow, TableCell } from '@mui/material';
 
 
 const ManageALlOrder = (props) => {
-    const { title, price, date, email, name, status, color, _id } = props?.product;
+    const { product_name, ship_postcode, date, cus_email, cus_name, status, color, _id } = props?.product;
     const { handleSetStatus } = props
     const handleChange = (event) => {
-        const status = event.target.value;
+        const status = event?.target?.value;
         handleSetStatus(status, _id)
 
     }
@@ -26,12 +26,12 @@ const ManageALlOrder = (props) => {
 
         >
             <TableCell component="th" scope="row">
-                {name}
+                {cus_name}
             </TableCell>
-            <TableCell align="center">{email}</TableCell>
+            <TableCell align="center">{cus_email}</TableCell>
             <TableCell align="center">{date}</TableCell>
-            <TableCell align="center">{title}</TableCell>
-            <TableCell align="center">{price}</TableCell>
+            <TableCell align="center">{product_name}</TableCell>
+            <TableCell align="center">{ship_postcode}</TableCell>
             <TableCell align="center">
                 <FormControl sx={{ minWidth: 80 }}>
                     <InputLabel id="demo-simple-select-autowidth-label">Action</InputLabel>
@@ -49,7 +49,6 @@ const ManageALlOrder = (props) => {
                         <MenuItem value={status}>{status}</MenuItem>
                         <MenuItem value="Approved">Approved</MenuItem>
                         <MenuItem value="Shipped">Shipped</MenuItem>
-
                     </Select>
                 </FormControl>
             </TableCell>

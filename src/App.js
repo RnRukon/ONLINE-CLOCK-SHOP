@@ -14,6 +14,7 @@ import PlaceOrder from './Pages/Home/HomeProducts/HomeProduct/PlaceOrder/PlaceOr
 import Products from './Pages/Home/Products/Products';
 import PrivateRoute from './Login/LoginToggle/PrivateRoute/PrivateRoute';
 import NoteFound from './Pages/NoteFound/NoteFound';
+import Success from './Pages/Home/HomeProducts/HomeProduct/PlaceOrder/Success';
 
 
 
@@ -32,9 +33,14 @@ function App() {
             <Route exact path='/products'>
               <Products></Products>
             </Route>
+
             <PrivateRoute path="/placeOrder/:id">
               <PlaceOrder></PlaceOrder>
             </PrivateRoute>
+            <PrivateRoute path="/success/:id">
+              <Success></Success>
+            </PrivateRoute>
+
 
             <Route exact path='/login'>
               <LoginToggle></LoginToggle>
