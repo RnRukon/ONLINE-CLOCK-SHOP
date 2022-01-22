@@ -19,6 +19,7 @@ const AddedProduct = () => {
     }
 
     const handleAddAProduct = (e) => {
+        e.preventDefault();
 
         fetch('https://evening-woodland-47343.herokuapp.com/addedProduct', {
             method: "POST",
@@ -30,14 +31,12 @@ const AddedProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                alert('Added product success')
+
                 if (data.modifiedCount) {
                     alert('Added Product success')
                 }
             })
 
-        e.preventDefault();
         e.target.reset();
     }
     return (

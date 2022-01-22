@@ -28,14 +28,12 @@ const PlaceOrder = () => {
     }, [id, setProduct])
 
 
-
-    // const { title, description, img, price } = product;
-    const title = product?.title;
-    const description = product?.description;
-    const img = product?.img;
-    const price = product?.price;
-    const email = user?.email;
-    const name = user?.displayName;
+    const product_name = product?.title;
+    const product_profile = product?.description;
+    const product_image = product?.img;
+    const total_amount = product?.price;
+    const cus_email = user?.email;
+    const cus_name = user?.displayName;
     const date = new Date().toDateString();
     const status = 'Pending';
     const color = 'rgb(255, 234, 115)';
@@ -46,9 +44,9 @@ const PlaceOrder = () => {
 
     const handleAddToCartProduct = () => {
 
-        const addToCartProduct = { title, description, img, price, email, name, date, status, color };
+        const addToCartProduct = { product_name, product_profile, product_image, total_amount, cus_email, cus_name, date, status, color };
 
-        fetch('https://evening-woodland-47343.herokuapp.com/addToCartProduct', {
+        fetch('https://evening-woodland-47343.herokuapp.com/init', {
             method: "POST",
             headers: {
 
@@ -58,11 +56,8 @@ const PlaceOrder = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.insertedId) {
 
-                    setOpen(true);
-
-                }
+                window.location.replace(data)
 
             })
 
@@ -85,12 +80,12 @@ const PlaceOrder = () => {
                     <Grid className="row ">
 
                         <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <img className='img-fluid' src={img} alt="" />
+                            <img className='img-fluid' src={product_image} alt="" />
                         </Grid>
                         <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <Typography variant='h3' color='secondary'>{title}</Typography>
-                            <p>{description}</p>
-                            <h4>{price}</h4>
+                            <Typography variant='h3' color='secondary'>{product_name}</Typography>
+                            <p>{product_profile}</p>
+                            <h4>{total_amount}</h4>
                             <Divider />
                             <Box className="py-4">
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Typography, Box, Container, TextField } from '@mui/material';
 import './PorterToday.css'
@@ -14,20 +14,45 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-
     boxShadow: 24,
     p: 4,
 };
 
 
-const PorterToday = () => {
+const RequestToday = () => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [requestData, setRequestData] = useState({});
 
+    const handleOnBlur = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...requestData }
+        newLoginData[field] = value;
+        setRequestData(newLoginData)
+
+    }
     const handleOnSubmit = (e) => {
         e.preventDefault()
+        fetch('https://evening-woodland-47343.herokuapp.com/request', {
+            method: "POST",
+            headers: {
+
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.insertedId) {
+                    alert('Request Massage success')
+                }
+            })
+
+
         handleClose()
     }
 
@@ -39,9 +64,9 @@ const PorterToday = () => {
                         <img className='w-20 text-center m-auto' src="https://i.ibb.co/HxBh7Vn/5a914c1cb15d5c051b3690af.png" alt="" />
                     </Box>
                     <Typography className='py-6 text-yellow-500 fw-bold' variant='h4'>CLock</Typography>
-                    <Typography className=' text-pink-600' variant='h4'>Become a Request Today!</Typography>
+                    <Typography className='pb-11 glowAnimation' variant='h4'>Become a Request Today!</Typography>
 
-                    <Button onClick={handleOpen} className='my-11 ' variant='contained' color="secondary">Send Request</Button>
+                    <Button onClick={handleOpen} className='my-11 ' variant='contained' color="secondary">Request Now</Button>
                 </Box>
             </Container>
 
@@ -63,7 +88,7 @@ const PorterToday = () => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" color="secondary" variant="h6" component="h2">
-                            Become a Potter Today!
+                            Become a Clock Today!
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                             <form onSubmit={handleOnSubmit}>
@@ -72,21 +97,30 @@ const PorterToday = () => {
                                     id="standard-basic"
                                     label="Email"
                                     color="secondary"
-                                    variant="standard" />
+                                    variant="standard"
+                                    name='email'
+                                    onChange={handleOnBlur}
+                                />
                                 <TextField
                                     sx={{ width: 1 }}
                                     id="standard-basic"
                                     label="Name"
                                     color="secondary"
-                                    variant="standard" /> <br />
+                                    variant="standard"
+                                    name='name'
+                                    onChange={handleOnBlur} /> <br />
                                 <TextField
                                     sx={{ width: 1 }}
+                                    multiline
                                     id="standard-basic"
                                     label="Massage"
                                     color="secondary"
-                                    variant="standard" /> <br /> <br />
+                                    variant="standard"
+                                    name="massage"
+                                    onChange={handleOnBlur} /> <br /> <br />
                                 <Button
                                     type='submit'
+
                                     className='my-11 '
                                     variant='contained'
                                     color="secondary"
@@ -101,4 +135,4 @@ const PorterToday = () => {
     );
 };
 
-export default PorterToday;
+export default RequestToday;

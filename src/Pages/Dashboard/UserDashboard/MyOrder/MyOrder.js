@@ -70,13 +70,13 @@ const MyOrder = () => {
 
 
                             <Box sx={{ height: 290, overflow: 'hidden' }}>
-                                <img className='img-fluid' src={product?.img} alt="..." />
+                                <img className='img-fluid' src={product?.product_image} alt="..." />
                             </Box>
                             <div className="card-body">
-                                <h5 className="card-title">{product?.title}</h5>
-                                <p className="card-text">{product?.description}</p>
+                                <h5 className="card-title">{product?.product_name}</h5>
+                                <p className="card-text">{product?.product_profile}</p>
                                 <typography>
-                                    ${product?.price}
+                                    ${product?.total_amount}
                                 </typography>
                             </div>
 

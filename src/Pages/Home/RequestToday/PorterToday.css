@@ -1,0 +1,23 @@
+.PorterToday-bg {
+    background-image: url(https://i.ibb.co/xJYZccK/wp7491687.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.glowAnimation {
+    font-family: cursive !important;
+    color: #fff;
+    text-align: center;
+    animation: glowAnimation 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowAnimation {
+    from {
+        text-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(0, 4, 255), 0 0 30px #ff85c2, 0 0 40px #e60073, 0 0 50px #ff0080, 0 0 60px #ff0080, 0 0 70px #ff0080;
+    }
+
+    to {
+        text-shadow: 0 0 20px rgb(0, 165, 187), 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 50px #ff0080, 0 0 60px #ff0080, 0 0 70px #ff0080, 0 0 80px #ff0080;
+    }
+}

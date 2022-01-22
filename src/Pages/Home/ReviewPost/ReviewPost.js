@@ -69,23 +69,23 @@ const ReviewPost = (props) => {
                     >
 
                         {
-                            reviews.map(review =>
+                            reviews.map((review, index) =>
 
 
-                                <Box className='m-2' key={review._id}>
+                                <Box className='m-2' key={index}>
                                     <Paper className=''>
                                         <Box className="d-flex">
                                             <Box className=" ">
                                                 <Box className="border border-r-2">
                                                     <Box sx={{ mt: -2, ml: -2 }}>
-                                                        <img style={{ width: '80px' }} className="rounded-pill" src={review.img ? review.img : 'https://i.ibb.co/XbsYVtZ/user.png'} alt="" />
+                                                        <img style={{ width: '80px' }} className="rounded-pill" src={review?.img ? review?.img : 'https://i.ibb.co/XbsYVtZ/user.png'} alt="" />
                                                     </Box>
                                                     <Box sx={{ p: 1 }}>
                                                         <Typography color="secondary" variant="h6">
-                                                            {review.name}
+                                                            {review?.name}
                                                         </Typography>
                                                         <Typography className="fw-bold text-green-500">
-                                                            {review.email}
+                                                            {review?.email}
                                                         </Typography>
                                                     </Box>
                                                 </Box>
@@ -98,7 +98,7 @@ const ReviewPost = (props) => {
                                                     {review.comment}
                                                 </Typography>
                                                 <Typography >
-                                                    <Rating name="size-large" readOnly defaultValue={review.rating} size="large" />
+                                                    <Rating name="size-large" readOnly value={review?.rating.toString()} size="large" />
                                                 </Typography>
                                             </Box>
                                         </Box>

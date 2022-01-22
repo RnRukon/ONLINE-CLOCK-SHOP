@@ -8,7 +8,7 @@ import { Button, TableRow, TableCell } from '@mui/material';
 
 const ManageALlOrder = (props) => {
     const { product_name, ship_postcode, date, cus_email, cus_name, status, color, _id } = props?.product;
-    const { handleSetStatus } = props
+    const { handleSetStatus } = props;
     const handleChange = (event) => {
         const status = event?.target?.value;
         handleSetStatus(status, _id)
@@ -54,7 +54,7 @@ const ManageALlOrder = (props) => {
             </TableCell>
             <TableCell align="center">
 
-                <Button onClick={() => props.handleDelete(_id)}
+                <Button onClick={() => props?.handleDelete(_id)}
                     variant="contained"
                     color='error'
                     sx={{ p: 0, }}

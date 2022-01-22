@@ -12,6 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
+import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -32,6 +33,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import PaymentIcon from '@mui/icons-material/Payment';
 import PreviewIcon from '@mui/icons-material/Preview';
 import LogoutIcon from '@mui/icons-material/Logout';
+import RequestGet from './RequestGet/RequestGet';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
@@ -96,6 +98,11 @@ function ResponsiveDrawer(props) {
                     <Link to={`${url}/addedProduct`} className="text-decoration-none">
                         <ListItem button>
                             <LogoutIcon />  Add a Product
+                        </ListItem>
+                    </Link>
+                    <Link to={`${url}/request`} className="text-decoration-none">
+                        <ListItem button>
+                            <AnnouncementOutlinedIcon />  Request
                         </ListItem>
                     </Link>
                 </Box>}
@@ -215,6 +222,9 @@ function ResponsiveDrawer(props) {
                     </AdminRoute>
                     <AdminRoute exact path={`${path}/addedProduct`}>
                         <AddedProduct></AddedProduct>
+                    </AdminRoute>
+                    <AdminRoute exact path={`${path}/request`}>
+                        <RequestGet></RequestGet>
                     </AdminRoute>
 
                 </Switch>
