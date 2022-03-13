@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Footer from '../../../../Sheard/Footer/Footer';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -83,16 +84,16 @@ const PlaceOrder = () => {
                             <img className='img-fluid' src={product_image} alt="" />
                         </Grid>
                         <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <Typography variant='h3' color='secondary'>{product_name}</Typography>
+                            <Typography variant='h5' color='secondary'>{product_name}</Typography>
                             <p>{product_profile}</p>
                             <h4>{total_amount}</h4>
                             <Divider />
                             <Box className="py-4">
 
-                                <Typography variant='h4'>
+                                <Typography variant='h5'>
                                     Name:  {user.displayName}
                                 </Typography>
-                                <Typography variant="h6">
+                                <Typography variant="body">
                                     Email:  {user.email}
                                 </Typography>
                             </Box>
@@ -103,7 +104,7 @@ const PlaceOrder = () => {
 
 
                             <Box className='mt-5'>
-                                <Typography variant='h4' color='secondary'>Contact informations</Typography>
+                                <Typography variant='h5' color='secondary'>Contact informations</Typography>
                                 <p className='text-yellow-500'>A: Kichijoji Sun Road 21/1, Tokyo.</p>
                                 <p>T: + 123 456 789: + 123 456 8788</p>
                                 <small>E: etruscan@qodeinteractive.com</small>
@@ -123,6 +124,7 @@ const PlaceOrder = () => {
                     </Stack>
                 </Box>
             </Container>
+            <Footer/>
         </Box>
     );
 };

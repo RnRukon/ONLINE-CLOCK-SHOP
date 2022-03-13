@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { Typography, Box, Container, TextField } from '@mui/material';
+import { Typography, Box, Container, TextField, Divider, Toolbar } from '@mui/material';
 import './PorterToday.css'
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
@@ -57,19 +57,24 @@ const RequestToday = () => {
     }
 
     return (
-        <Box className='PorterToday-bg  py-44'>
-            <Container className='d-flex justify-content-center '>
-                <Box className='text-center bg-gray-900 p-5'>
-                    <Box className='d-flex'>
-                        <img className='w-20 text-center m-auto' src="https://i.ibb.co/HxBh7Vn/5a914c1cb15d5c051b3690af.png" alt="" />
+        <Container>
+
+            <Box >
+                <Divider>
+                    <Typography variant='h4'>Request Today!</Typography>
+                </Divider>
+                <Toolbar/>
+                <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <Box>
+                        <img src="https://i.ibb.co/HxBh7Vn/5a914c1cb15d5c051b3690af.png" alt="" />
                     </Box>
-                    <Typography className='py-6 text-yellow-500 fw-bold' variant='h4'>CLock</Typography>
-                    <Typography className='pb-11 glowAnimation' variant='h4'>Become a Request Today!</Typography>
-
-                    <Button onClick={handleOpen} className='my-11 ' variant='contained' color="secondary">Request Now</Button>
+                    <Box sx={{py:2}}>
+                       
+                        <Button onClick={handleOpen} variant='contained' color="secondary">Request Now</Button>
+                    </Box>
                 </Box>
-            </Container>
-
+            </Box>
+            <Toolbar />
             {/* ------------------------------------------------------------------------- */}
 
 
@@ -88,7 +93,7 @@ const RequestToday = () => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" color="secondary" variant="h6" component="h2">
-                            Become a Clock Today!
+                            Become a Request Today!
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                             <form onSubmit={handleOnSubmit}>
@@ -131,7 +136,7 @@ const RequestToday = () => {
                 </Fade>
             </Modal>
 
-        </Box>
+        </Container>
     );
 };
 

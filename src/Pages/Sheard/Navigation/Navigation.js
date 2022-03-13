@@ -12,9 +12,9 @@ const Navigation = () => {
     }
     const location = useLocation().pathname;
     return (
-        <Navbar collapseOnSelect expand="lg" fixed="top" style={{ backgroundColor: 'black' }} variant="dark">
+        <Navbar collapseOnSelect expand="lg" fixed="top" style={{ backgroundColor: '#011837' }} variant="dark">
             <Container>
-                <Navbar.Brand as={NavLink} to="/" >
+                <Navbar.Brand as={NavLink} to="/" style={style}>
                     {location === '/'
                         ? 'ONLINE CLOCK SHOP'
                         : location.toUpperCase().replace('/', '')}

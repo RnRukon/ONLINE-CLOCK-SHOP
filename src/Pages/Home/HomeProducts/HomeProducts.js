@@ -1,7 +1,7 @@
-import { Container, LinearProgress, Typography } from '@mui/material';
+import { Divider, Grid, LinearProgress, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import './HomeProduct.css'
+
 import HomeProduct from './HomeProduct/HomeProduct';
 
 
@@ -14,20 +14,28 @@ const HomeProducts = () => {
             .then(data => setProduces(data))
     }, [])
     return (
-        <Box className="home-product-container pb-20">
+        <Box >
             {products?.length === 0 && <LinearProgress color="secondary" />}
-            <Container>
+            <Box>
+                <Toolbar />
 
-                <Typography className=' underline uppercase shadow-inner text-yellow-300' variant='h4' sx={{ py: 5, textAlign: 'center', fontWeight: 'bold' }}>
-                    Unique Clock Collection
-                </Typography>
-                <Box className="row row-cols-1 row-cols-sm-12  row-cols-md-3 row-cols-lg-3 g-4">
+                <Divider>
+                    <Typography color="secondary" variant='h4' sx={{ textAlign: 'center', fontWeight: 'bold'}}>
+                        Unique Collection
+                    </Typography>
+                </Divider>
+                <Toolbar />
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >
                     {
-                        products?.slice(0, 6)?.map(product => <HomeProduct key={product?._id} product={product}></HomeProduct>)
-                    }
+                        products?.slice(0, 6)?.map(product =>
 
-                </Box>
-            </Container>
+                            <Grid item xs={4} sm={4} md={4} key={product?._id}>
+                                <HomeProduct product={product}></HomeProduct>
+                            </Grid>
+                        )}
+
+                </Grid>
+            </Box>
         </Box>
     );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert, AlertTitle, Button, Grid, TextField } from '@mui/material';
 import useAuth from '../../Hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
-import LoginIcon from '@mui/icons-material/Login';
+
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
@@ -52,7 +52,7 @@ const Login = () => {
                     onChange={login}
                     color="secondary"
                 />
-                <Button color="secondary" type="submit" sx={{ width: 1, mt: 5 }} className="feature-button" variant="contained">     <LoginIcon />Login</Button>
+                <Button color="secondary" type="submit" sx={{ width: 1, mt: 5 }} className="feature-button" variant="contained">Login</Button>
 
             </form>
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-// import Spinner from '../../Hooks/Spinner';
 import Spinner from '../../../Hooks/Spinner'
 import useAuth from '../../../Hooks/useAuth';
-// import useAuth from '../../Hooks/useAuth';
 
 
 

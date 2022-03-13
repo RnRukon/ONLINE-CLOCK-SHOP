@@ -2,60 +2,85 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Button, Container, LinearProgress, Typography } from '@mui/material';
-import './Product.css'
+import { Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Stack, Toolbar, Typography } from '@mui/material';
+
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
     const [products, setProducts] = useState([]) || '';
-
+    const [page, setPage] = useState(1);
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/products')
+        fetch(`https://evening-woodland-47343.herokuapp.com/products?page=${page}`)
             .then(res => res.json())
             .then(data => setProducts(data));
-    }, [setProducts])
+    }, [setProducts, page])
+
+    console.log(page)
     return (
         <Box className='product-container '>
             <Navigation />
+            <Box sx={{
+                backgroundImage: 'url(https://i.ibb.co/fpMbwX8/shutterstock-219283411-resize.jpg)',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize:'cover'
+               
 
+            }}>
+
+                <Toolbar />
+                <Toolbar />
+                <Toolbar />
+                <Toolbar />
+                <Toolbar />
+                <Toolbar />
+            </Box>
             <Container className='py-11'>
-
-                <Typography color="secondary" className=' fw-bold underline text-center my-5' variant='h4'>Products  {products?.length}</Typography>
-
-                <Typography className=' text-red-600 uppercase underline fw-bold pb-10' variant='h5'>
-                    Unique Clock Collection
-                </Typography>
+                <Divider>
+                    <Typography color="secondary" variant='h4' sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+                        Unique Collection
+                    </Typography>
+                </Divider>
+                <Toolbar />
                 {
                     products.length < 1 && <LinearProgress color="secondary" />
                 }
-                <Box className="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >
                     {
                         products?.map(product =>
-                            <Box
-                                key={product?._id} className="col ">
-                                <Box className="card h-100 ">
-                                    <Box sx={{ overflow: 'hidden' }}>
-                                        <img className='img-fluid' src={product?.img} alt="..." />
+                            <Grid item xs={4} sm={4} md={3} key={product?._id}>
+                                <Box sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+                                    <Box>
+                                        <CardMedia
+                                            sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
+                                            component="img"
+                                            src={product?.img} alt={product?.title} />
+                                    </Box>
+                                    <Box>
+                                        <Typography variant="body"
+                                            sx={{ fontWeight: 'bold' }}>
+                                            {product?.title.slice(0, 20)}</Typography>
 
+                                        <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product?.description.slice(0, 50)} ...</Typography>
                                     </Box>
-                                    <Box className="card-body">
-                                        <Typography
-                                            variant="h5"
-                                            className="card-title fw-bold">{product?.title}
-                                        </Typography>
-                                        <Typography variant='body2' className="card-text">{product?.description}</Typography>
-                                    </Box>
-                                    <Box className="card-footer d-flex justify-content-between">
-                                        <Link to={`placeOrder/${product._id}`}>
-                                            <Button color="secondary" variant="contained">Order now</Button>
+                                    <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <Link to={`placeOrder/${product?._id}`}>
+                                            <Button color="secondary" size='small' variant="contained">Order now</Button>
                                         </Link>
                                         <Typography variant='h5'>
                                             ${product?.price}
                                         </Typography>
-                                    </Box>
+                                    </CardActions>
                                 </Box>
-                            </Box>)
+                            </Grid>)
                     }
-                </Box>
+                </Grid>
+                <Stack spacing={2}>
+                    <Pagination
+                        sx={{ pt: 5, m: 'auto' }}
+                        count={products.length}
+                        color="secondary"
+                        onChange={(e, value) => setPage(value)}
+                    />
+                </Stack>
             </Container>
             <Footer></Footer>
         </Box>

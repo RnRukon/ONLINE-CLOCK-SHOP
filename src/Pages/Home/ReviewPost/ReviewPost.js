@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
-import { Paper, Typography } from '@mui/material';
-import './ReviewPost.css'
+import { Avatar, Divider, Typography } from '@mui/material';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -42,9 +41,12 @@ const ReviewPost = (props) => {
     return (
         <Box className='review-container  py-4'>
             <Container >
-                <Typography color="secondary" className='underline' variant='h4'>
-                    Review
-                </Typography>
+
+                <Divider>
+                    <Typography color="secondary" sx={{ textAlign: 'center' }} variant='h4'>
+                        Review
+                    </Typography>
+                </Divider>
                 <Box sx={{ flexGrow: 1 }}>
 
                     <Carousel
@@ -52,7 +54,6 @@ const ReviewPost = (props) => {
                         className="py-20 px-1"
                         swipeable={true}
                         draggable={true}
-                        showDots={true}
                         ssr={true} // means to render carousel on server-side.
                         infinite={true}
                         autoPlay={props.deviceType !== "mobile" ? true : false}
@@ -63,48 +64,48 @@ const ReviewPost = (props) => {
                         containerClass="carousel-container"
                         removeArrowOnDeviceType={["tablet", "mobile"]}
                         deviceType={props.deviceType}
-                        dotListClass="custom-dot-list-style"
+
                         itemClass="carousel-item-padding-40-px"
 
                     >
 
                         {
                             reviews.map((review, index) =>
+                                <Box key={index} sx={{ boxShadow: '1px 2px 10px #cee3ff', mx: 2, height: 230, p: 2, borderRadius: 2 }}>
+
+                                    <Box >
+
+                                        <Avatar
+                                            height="100px"
+                                            src={review?.img ? review?.img : 'https://i.ibb.co/XbsYVtZ/user.png'} alt="" />
+
+                                    </Box>
+
+                                    <Box >
+                                        <Typography color="secondary" variant="h6">
+                                            {review?.name}
+                                        </Typography>
+                                        <Typography >
+                                            {review?.email}
+                                        </Typography>
+                                    </Box>
+                                    <Divider>
+                                        <Typography color="secondary" sx={{ fontWeight: 'bold' }} variant="body2">
+                                            Customer Comment
+                                        </Typography>
+                                    </Divider>
+                                    <Box >
+
+                                        <Typography variant="body2">
+                                            {review.comment}
+                                        </Typography>
 
 
-                                <Box className='m-2' key={index}>
-                                    <Paper className=''>
-                                        <Box className="d-flex">
-                                            <Box className=" ">
-                                                <Box className="border border-r-2">
-                                                    <Box sx={{ mt: -2, ml: -2 }}>
-                                                        <img style={{ width: '80px' }} className="rounded-pill" src={review?.img ? review?.img : 'https://i.ibb.co/XbsYVtZ/user.png'} alt="" />
-                                                    </Box>
-                                                    <Box sx={{ p: 1 }}>
-                                                        <Typography color="secondary" variant="h6">
-                                                            {review?.name}
-                                                        </Typography>
-                                                        <Typography className="fw-bold text-green-500">
-                                                            {review?.email}
-                                                        </Typography>
-                                                    </Box>
-                                                </Box>
-                                            </Box>
-                                            <Box className="">
-                                                <Typography color="secondary" className="underline" sx={{ fontWeight: 'bold' }} variant="body2">
-                                                    Customer Comment
-                                                </Typography>
-                                                <Typography variant="body2">
-                                                    {review.comment}
-                                                </Typography>
-                                                <Typography >
-                                                    <Rating name="size-large" readOnly value={review?.rating.toString()} size="large" />
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </Paper>
+                                    </Box>
+                                    <Typography>
+                                        <Rating name="size-large" readOnly value={review?.rating} size="large" />
+                                    </Typography>
                                 </Box>
-
 
                             )
                         }

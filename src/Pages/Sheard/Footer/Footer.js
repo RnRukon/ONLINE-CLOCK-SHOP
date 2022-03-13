@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 const Footer = () => {
     return (
-        <div className=" bg-black text-white">
+        <div className=" text-white" style={{backgroundColor:'#011837'}}>
             <div className='container py-20'>
                 <div className='row '>
                     <div className='col-lg-4 col-md-6 col-sm-12'>
