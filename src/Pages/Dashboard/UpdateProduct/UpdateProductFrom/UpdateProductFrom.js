@@ -30,7 +30,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
     const [product, setProduct] = useState({});
     const { register, handleSubmit, reset } = useForm();
     const [img, setImg] = useState('');
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(0);
     const [hover, setHover] = React.useState(-1);
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
 
 
     const update = (data) => {
-        const newUpdateData = { ...data, img }
+        const newUpdateData = { ...data, img, rating: value }
         axios.put(`https://evening-woodland-47343.herokuapp.com/updateProduct/${id}`, newUpdateData)
             .then(res => {
                 if (res?.data?.modifiedCount) {
