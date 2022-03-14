@@ -71,7 +71,7 @@ const ReviewPost = (props) => {
 
                         {
                             reviews.map((review, index) =>
-                                <Box key={index} sx={{ boxShadow: '1px 2px 10px #cee3ff', mx: 2, height: 230, p: 2, borderRadius: 2 }}>
+                                <Box key={index} sx={{ boxShadow: '1px 2px 10px #cee3ff', mx: 2, height: 230, p: 2, borderRadius: 2,cursor:'pointer' }}>
 
                                     <Box >
 
@@ -103,7 +103,7 @@ const ReviewPost = (props) => {
 
                                     </Box>
                                     <Typography>
-                                        <Rating name="size-large" readOnly value={review?.rating} size="large" />
+                                        <Rating name="size-large" readOnly defaultValue={review?.rating} size="large" />
                                     </Typography>
                                 </Box>
 

@@ -8,7 +8,8 @@ import { Button, TableRow, TableCell } from '@mui/material';
 
 const ManageALlOrder = (props) => {
     const { product_name, ship_postcode, date, cus_email, cus_name, status, color, _id } = props?.product;
-    const { handleSetStatus } = props;
+    const { handleSetStatus, index } = props;
+
     const handleChange = (event) => {
         const status = event?.target?.value;
         handleSetStatus(status, _id)
@@ -25,6 +26,9 @@ const ManageALlOrder = (props) => {
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 
         >
+            <TableCell component="th" scope="row">
+                {index}
+            </TableCell>
             <TableCell component="th" scope="row">
                 {cus_name}
             </TableCell>

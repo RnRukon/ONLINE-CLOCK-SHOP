@@ -2,7 +2,7 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Stack, Toolbar, Typography } from '@mui/material';
+import { Badge, Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Rating, Stack, Toolbar, Typography } from '@mui/material';
 
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
@@ -21,8 +21,8 @@ const Products = () => {
             <Box sx={{
                 backgroundImage: 'url(https://i.ibb.co/fpMbwX8/shutterstock-219283411-resize.jpg)',
                 backgroundRepeat: 'no-repeat',
-                backgroundSize:'cover'
-               
+                backgroundSize: 'cover'
+
 
             }}>
 
@@ -48,12 +48,12 @@ const Products = () => {
                         products?.map(product =>
                             <Grid item xs={4} sm={4} md={3} key={product?._id}>
                                 <Box sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
-                                    <Box>
+                                    <Badge badgeContent={` $${product?.price}`} color="secondary">
                                         <CardMedia
                                             sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
                                             component="img"
                                             src={product?.img} alt={product?.title} />
-                                    </Box>
+                                    </Badge>
                                     <Box>
                                         <Typography variant="body"
                                             sx={{ fontWeight: 'bold' }}>
@@ -65,9 +65,7 @@ const Products = () => {
                                         <Link to={`placeOrder/${product?._id}`}>
                                             <Button color="secondary" size='small' variant="contained">Order now</Button>
                                         </Link>
-                                        <Typography variant='h5'>
-                                            ${product?.price}
-                                        </Typography>
+                                        <Rating name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
                                     </CardActions>
                                 </Box>
                             </Grid>)

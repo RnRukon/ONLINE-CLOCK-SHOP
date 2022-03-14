@@ -34,6 +34,8 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import PreviewIcon from '@mui/icons-material/Preview';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RequestGet from './RequestGet/RequestGet';
+import Footer from '../Sheard/Footer/Footer';
+import { Container } from '@mui/material';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
@@ -195,39 +197,43 @@ function ResponsiveDrawer(props) {
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, p: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Switch>
-                    {!admin && <Route exact path={path}>
-                        <MyOrder></MyOrder>
-                    </Route>}
-                    {admin && <Route exact path={path}>
-                        <ManageAllOrders></ManageAllOrders>
-                    </Route>}
-                    <Route exact path={`${path}/pay`}>
-                        <Pay></Pay>
-                    </Route>
-                    <Route exact path={`${path}/review`}>
-                        <Review></Review>
-                    </Route>
-                    <AdminRoute exact path={`${path}/makeAdmin`}>
-                        <MakeAdmin></MakeAdmin>
-                    </AdminRoute>
-                    <AdminRoute exact path={`${path}/updateProduct`}>
-                        <UpdateProduct></UpdateProduct>
-                    </AdminRoute>
-                    <AdminRoute exact path={`${path}/updateProductFrom/:id`}>
-                        <UpdateProductFrom></UpdateProductFrom>
-                    </AdminRoute>
-                    <AdminRoute exact path={`${path}/addedProduct`}>
-                        <AddedProduct></AddedProduct>
-                    </AdminRoute>
-                    <AdminRoute exact path={`${path}/request`}>
-                        <RequestGet></RequestGet>
-                    </AdminRoute>
+                <Container>
+                    <Switch>
+                        {!admin && <Route exact path={path}>
+                            <MyOrder></MyOrder>
+                        </Route>}
+                        {admin && <Route exact path={path}>
+                            <ManageAllOrders></ManageAllOrders>
+                        </Route>}
+                        <Route exact path={`${path}/pay`}>
+                            <Pay></Pay>
+                        </Route>
+                        <Route exact path={`${path}/review`}>
+                            <Review></Review>
+                        </Route>
+                        <AdminRoute exact path={`${path}/makeAdmin`}>
+                            <MakeAdmin></MakeAdmin>
+                        </AdminRoute>
+                        <AdminRoute exact path={`${path}/updateProduct`}>
+                            <UpdateProduct></UpdateProduct>
+                        </AdminRoute>
+                        <AdminRoute exact path={`${path}/updateProductFrom/:id`}>
+                            <UpdateProductFrom></UpdateProductFrom>
+                        </AdminRoute>
+                        <AdminRoute exact path={`${path}/addedProduct`}>
+                            <AddedProduct></AddedProduct>
+                        </AdminRoute>
+                        <AdminRoute exact path={`${path}/request`}>
+                            <RequestGet></RequestGet>
+                        </AdminRoute>
 
-                </Switch>
+                    </Switch>
+                </Container>
+                <Toolbar />
+                <Footer />
             </Box>
         </Box>
     );
