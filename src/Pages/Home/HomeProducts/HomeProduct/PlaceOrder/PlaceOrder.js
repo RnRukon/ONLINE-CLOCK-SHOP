@@ -3,11 +3,8 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../../../Hooks/useAuth';
 import Navigation from '../../../../Sheard/Navigation/Navigation';
-import { Button, Box, Container, Grid, Typography, Divider } from '@mui/material';
-import './PlaceOrder.css'
-
+import { Button, Box, Container, Grid, Typography, Divider, Toolbar } from '@mui/material';
 import Stack from "@mui/material/Stack";
-
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Footer from '../../../../Sheard/Footer/Footer';
@@ -73,22 +70,31 @@ const PlaceOrder = () => {
         setOpen(false);
     };
 
+    const back = () => window.history.back();
     return (
-        <Box className='placeOrder-container'>
+        <Box >
             <Navigation />
-            <Container className='py-36'>
+            <Toolbar />
+            <Container sx={{ py: 10 }}>
                 <Box sx={{ flexGrow: 1 }}>
-                    <Grid className="row ">
+                    <Grid container
+                        spacing={{ xs: 2, md: 3 }}
+                        columns={{ xs: 4, sm: 8, md: 12 }}>
 
-                        <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <img className='img-fluid' src={product_image} alt="" />
+                        <Grid item xs={4} sm={4} md={6}>
+                            <img style={{ width: '100%' }} src={product_image} alt="" />
                         </Grid>
-                        <Grid className='col-sm-12 col-md-6 col-lg-6'>
+
+                        <Grid item xs={4} sm={4} md={6}>
                             <Typography variant='h5' color='secondary'>{product_name}</Typography>
-                            <p>{product_profile}</p>
-                            <h4>{total_amount}</h4>
+                            <Typography>{product_profile}</Typography>
+
+                            <Typography variant='h5'
+                                sx={{ fontWeight: 'bold', color: 'red' }}
+                            >${total_amount}
+                            </Typography>
                             <Divider />
-                            <Box className="py-4">
+                            <Box >
 
                                 <Typography variant='h5'>
                                     Name:  {user.displayName}
@@ -97,23 +103,34 @@ const PlaceOrder = () => {
                                     Email:  {user.email}
                                 </Typography>
                             </Box>
+                            <Toolbar />
+                            <Button sx={{ mr: 1 }} color='secondary' onClick={handleAddToCartProduct} variant="contained" >Purchase</Button>
 
-                            <Button sx={{ mr: 3 }} className='mt-2' color='secondary' onClick={handleAddToCartProduct} variant="contained" >Add to Cart</Button>
-                            <Link className='mr-5 ' to='/products'><Button className='mt-2' color='primary' variant="contained"> Explore</Button></Link>
-                            <Link to='/' ><Button color='warning' className='mt-2' variant="contained"> Go to home</Button></Link>
+                            <Link to='/products'>
+                                <Button sx={{ mr: 1 }} color='primary' variant="contained"> Explore</Button>
+                            </Link>
+
+                            <Button
+                                onClick={back}
+                                color='warning'
+                                variant="contained">
+                                Go Back
+                            </Button>
 
 
-                            <Box className='mt-5'>
+
+                            <Box sx={{ mt: 2 }}>
                                 <Typography variant='h5' color='secondary'>Contact informations</Typography>
-                                <p className='text-yellow-500'>A: Kichijoji Sun Road 21/1, Tokyo.</p>
-                                <p>T: + 123 456 789: + 123 456 8788</p>
+                                <Typography>A: Kichijoji Sun Road 21/1, Tokyo.</Typography>
+                                <Typography>T: + 123 456 789: + 123 456 8788</Typography>
                                 <small>E: etruscan@qodeinteractive.com</small>
-                                <p>W: Thursday to Sunday – 12.00 – 20.00h.</p>
+                                <Typography>W: Thursday to Sunday – 12.00 – 20.00h.</Typography>
                             </Box>
                         </Grid>
 
 
                     </Grid>
+
                     <Stack spacing={2} sx={{ width: "100%" }}>
 
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -124,7 +141,7 @@ const PlaceOrder = () => {
                     </Stack>
                 </Box>
             </Container>
-            <Footer/>
+            <Footer />
         </Box>
     );
 };

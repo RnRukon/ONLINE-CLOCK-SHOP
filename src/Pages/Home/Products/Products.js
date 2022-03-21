@@ -63,9 +63,9 @@ const Products = () => {
                                     </Box>
                                     <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                         <Link to={`placeOrder/${product?._id}`}>
-                                            <Button color="secondary" size='small' variant="contained">Order now</Button>
+                                            <Button color="secondary" size='small' variant="contained">Purchase</Button>
                                         </Link>
-                                        <Rating name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
+                                        <Rating size='small' name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
                                     </CardActions>
                                 </Box>
                             </Grid>)

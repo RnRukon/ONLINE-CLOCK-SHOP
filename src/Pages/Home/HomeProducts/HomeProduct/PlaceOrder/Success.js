@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, Container, Grid, Typography, Divider } from '@mui/material';
+import { Button, Box, Container, Grid, Typography, Divider, Toolbar } from '@mui/material';
 import Navigation from '../../../../Sheard/Navigation/Navigation';
 import { Link, useParams } from 'react-router-dom';
 
@@ -14,48 +14,81 @@ const Success = () => {
             .then(data => setProduct(data))
     }, [id, setProduct])
 
-
+    const back = () => window.history.back();
     return (
-        <Box className='placeOrder-container'>
+        <Box>
             <Navigation />
-            <Container className='py-36'>
-                <h1 className=' text-center text-green-400 border'>Permanent Successfully</h1>
+            <Container sx={{py:10}}>
+                <Typography variant='h4' 
+                sx={{color:'green',fontWeight:'bold',textAlign:'center',py:10}}
+                >Permanent Successfully</Typography>
                 <Box sx={{ flexGrow: 1 }}>
-                    <Grid className="row ">
+                    <Grid container
+                        spacing={{ xs: 2, md: 3 }}
+                        columns={{ xs: 4, sm: 8, md: 12 }}>
 
-                        <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <img className='img-fluid' src={product?.product_image} alt="" />
+                        <Grid item xs={4} sm={4} md={6}>
+                            <img style={{ width: '100%' }} src={product?.product_image} alt="" />
                         </Grid>
-                        <Grid className='col-sm-12 col-md-6 col-lg-6'>
-                            <Typography variant='h3' color='secondary'>{product?.product_name}</Typography>
-                            <p>{product?.product_profile}</p>
-                            <h4>$ {product?.total_amount}</h4>
-                            <Divider />
-                            <Box className="py-4">
 
-                                <Typography variant='h4'>
+                        <Grid item xs={4} sm={4} md={6}>
+                            <Typography variant='h5' color='secondary'>{product?.product_name}</Typography>
+                            <Typography>{product?.product_profile}</Typography>
+
+                            <Typography variant='h5'
+                                sx={{ fontWeight: 'bold', color: 'red' }}
+                            >${product?.total_amount}
+                            </Typography>
+                            <Divider />
+                            <Box >
+
+                                <Typography variant='h5'>
                                     Name:  {product?.cus_name}
                                 </Typography>
-                                <Typography variant="h6">
+                                <Typography variant="body">
                                     Email:  {product?.cus_email}
                                 </Typography>
                             </Box>
+                            <Toolbar />
 
 
-                            <Link className='mr-5 ' to='/products'><Button className='mt-2' color='primary' variant="contained"> Explore</Button></Link>
-                            <Link to='/' className=' mr-5'><Button color='warning' className='mt-2' variant="contained"> Go to home</Button></Link>
+                            <Link to='/products'>
+                                <Button sx={{ mr: 1 }}
+                                    size='small'
+                                    color='primary'
+                                    variant="contained"> Explore
+                                </Button>
+                            </Link>
 
-                            <Link to='/dashboard' ><Button color='secondary' className='mt-2' variant="contained">Dashboard</Button></Link>
+                            <Button
+                                onClick={back}
+                                sx={{ mr: 1 }}
+                                size='small'
+                                color='warning'
+                                variant="contained">
+                                Go Back
+                            </Button>
+                            <Link to='/dashboard'>
+                                <Button
+                                    size='small'
+                                    color='info'
+                                    variant="contained">
+                                    Dashboard
+                                </Button>
+                            </Link>
 
 
-                            <Box className='mt-5'>
-                                <Typography variant='h4' color='secondary'>Contact informations</Typography>
-                                <p className='text-yellow-500'>A: Kichijoji Sun Road 21/1, Tokyo.</p>
-                                <p>T: + 123 456 789: + 123 456 8788</p>
+
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant='h5' color='secondary'>Contact informations</Typography>
+                                <Typography>A: Kichijoji Sun Road 21/1, Tokyo.</Typography>
+                                <Typography>T: + 123 456 789: + 123 456 8788</Typography>
                                 <small>E: etruscan@qodeinteractive.com</small>
-                                <p>W: Thursday to Sunday – 12.00 – 20.00h.</p>
+                                <Typography>W: Thursday to Sunday – 12.00 – 20.00h.</Typography>
                             </Box>
                         </Grid>
+
+
                     </Grid>
                 </Box>
             </Container>

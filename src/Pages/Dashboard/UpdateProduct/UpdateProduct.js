@@ -3,6 +3,7 @@ import { Button, Box, CardActions, Grid, CardMedia, Typography, Badge, Divider, 
 import axios from 'axios';
 
 import UpdateProductFrom from './UpdateProductFrom/UpdateProductFrom';
+import Swal from 'sweetalert2';
 
 
 const UpdateProduct = () => {
@@ -25,18 +26,32 @@ const UpdateProduct = () => {
 
 
     const handleProductDelete = (id) => {
-        window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`https://evening-woodland-47343.herokuapp.com/productDelete/${id}`)
-                .then(res => res.data.deletedCount &&
-                    fetch('https://evening-woodland-47343.herokuapp.com/products')
-                        .then(res => res.json())
-                        .then(data => setUpdateData(data) || '')
-                        .finally(() => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/productDelete/${id}`)
 
-                        })
-                )
+                    .then(res => {
+                        if (res.data.deletedCount === 1) {
+                            const deleted = updateData.filter((d) => d._id !== id);
+                            setUpdateData(deleted);
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
 
-
+                    })
+            }
+        })
     }
 
 

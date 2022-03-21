@@ -6,14 +6,8 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import { TableRow, TableCell, TableBody, Divider, Fab, Typography, Toolbar, Box, TablePagination } from '@mui/material';
 import ManageALlOrder from './ManageAllOrder/ManageALlOrder';
+import Swal from 'sweetalert2';
 
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 
 // fetch all order =========================
@@ -21,7 +15,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const ManageAllOrders = () => {
     const [products, setProducts] = useState([]);
-    const [open, setOpen] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [page, setPage] = React.useState(0);
 
@@ -36,15 +29,35 @@ const ManageAllOrders = () => {
 
 
     const handleDelete = (id) => {
-        window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`https://evening-woodland-47343.herokuapp.com/manageAllOrderDelete/${id}`)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/manageAllOrderDelete/${id}`)
 
-                .then(res => res.data.deletedCount &&
-                    fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
-                        .then(res => res.json())
-                        .then(data => setProducts(data))
-                )
-        setOpen(true);
+                .then(res=>{
+                    if (res.data.deletedCount === 1) {
+                        const deleted = products.filter((d) => d._id !== id);
+                        setProducts(deleted);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                          )
+                    }
+                    
+                })
+
+             
+            }
+          })
+
     }
 
     const handleChangePage = (event, newPage) => {
@@ -55,13 +68,7 @@ const ManageAllOrders = () => {
         setPage(0);
     };
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
+ 
 
 
 
@@ -157,15 +164,6 @@ const ManageAllOrders = () => {
                 />
             </TableContainer>
 
-            <Stack spacing={2} sx={{ width: '100%' }}>
-
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Delete success!
-                    </Alert>
-                </Snackbar>
-
-            </Stack>
         </Box>
     );
 };

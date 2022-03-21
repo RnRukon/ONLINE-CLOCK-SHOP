@@ -1,21 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../Hooks/useAuth';
-import { Button, Box, CardActions } from '@mui/material';
+import { Button, Box, CardActions, Grid, Badge, CardMedia, Typography } from '@mui/material';
 import './MyOrder.css'
+import Swal from 'sweetalert2'
 
-import Stack from "@mui/material/Stack";
 
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 const MyOrder = () => {
     const { user } = useAuth();
     const [products, setProducts] = useState([])
-    const [open, setOpen] = React.useState(false);
+
     useEffect(() => {
         fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
             .then(res => res.json())
@@ -23,84 +17,95 @@ const MyOrder = () => {
     }, [user?.email])
 
 
+
+
     const handleMyOrderDelete = (id) => {
-        window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`https://evening-woodland-47343.herokuapp.com/myOrderDelete/${id}`)
-                .then(res => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-                    res.data.deletedCount &&
-                        fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
-                            .then(res => res.json())
-                            .then(data => setProducts(data))
-                }
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/myOrderDelete/${id}`)
+                    .then(res => {
 
-                )
-        setOpen(true)
+                        if (res.data.deletedCount === 1) {
+                            const deleted = products.filter((d) => d._id !== id);
+                            setProducts(deleted)
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+            }
+        })
+
+
     }
 
-    const handleClose = (event, reason) => {
-        if (reason === "clickaway") {
-            return;
-        }
 
-        setOpen(false);
-    };
 
     return (
         <div >
 
             {products?.length === 0 ?
-                <h4 className=' text-pink-800 text-center'>No order was found for you, please order first</h4>
+                <Typography variant='h5'
+                    sx={{ textAlign: 'center', color: 'red', py: 5 }}
+                >No order was found for you, please order first</Typography>
                 :
-                <h1 className=' text-pink-600 text-center'>My Order {products?.length} </h1>
+                <Typography variant='h5' sx={{ textAlign: 'center', color: 'crimson', py: 5 }}>My Order {products?.length} </Typography>
             }
 
             {
                 products?.length === 0 && <img src="https://i.ibb.co/tq9K32W/Helium-10-xray.jpg" alt="" />
             }
-            <div className="row row-cols-1 row-cols-sm-4  row-cols-md-2 row-cols-lg-4 g-4">
+            <Grid container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }} >
 
+                {products?.map(product =>
 
-                {
-                    products?.map(product => <div key={product?._id} className="col ">
+                    <Grid item xs={4} sm={4} md={3} key={product?._id}>
+                        <Box sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+                            <Badge badgeContent={` $${product?.total_amount}`} color="secondary">
+                                <CardMedia
+                                    sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
+                                    component="img"
+                                    src={product?.product_image} alt={product?.product_name} />
+                            </Badge>
+                            <Box>
+                                <Typography variant="body"
+                                    sx={{ fontWeight: 'bold' }}>
+                                    {product?.product_name.slice(0, 20)}</Typography>
 
-
-
-                        <Box className="card h-100">
-
-
-                            <Box sx={{ height: 290, overflow: 'hidden' }}>
-                                <img className='img-fluid' src={product?.product_image} alt="..." />
+                                <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product?.product_profile.slice(0, 50)} ...</Typography>
                             </Box>
-                            <div className="card-body">
-                                <h5 className="card-title">{product?.product_name}</h5>
-                                <p className="card-text">{product?.product_profile}</p>
-                                <typography>
-                                    ${product?.total_amount}
-                                </typography>
-                            </div>
+                            <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
-                            <CardActions className="card-footer d-flex justify-content-between">
-                                <Button sx={{ width: 100, p: 0 }} onClick={() => handleMyOrderDelete(product._id)}>Delete</Button>
-                                <Button sx={{ width: 100, p: 0 }} style={{ backgroundColor: `${product?.color}` }}>{product.status}</Button>
+                                <Button
+                                    onClick={() => handleMyOrderDelete(product._id)}
+                                    color="error" size='small' variant="contained">Delete</Button>
+
+                                <Button size='small'
+                                    color={
+                                        (product?.status === 'Delivered' && 'success')
+                                        || (product?.status === 'Approved' && 'info')
+                                        || 'warning'
+                                    }
+                                    variant="contained"
+                                >{product?.status}
+                                </Button>
                             </CardActions>
-
-
                         </Box>
-                        <Stack spacing={2} sx={{ width: "100%" }}>
-
-                            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                                <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-                                    Delete success!
-                                </Alert>
-                            </Snackbar>
-                        </Stack>
-
-                    </div>)
-                }
-            </div>
-
-
+                    </Grid>)}
+            </Grid>
         </div>
     );
 };
