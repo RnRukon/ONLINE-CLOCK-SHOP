@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, CardActions, CardMedia, Typography, Badge, Rating } from '@mui/material';
+import { Button, CardActions, CardMedia, Typography, Badge, Rating, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 
 const HomeProduct = ({ product }) => {
     const { title, description, img, _id, price } = product;
 
     return (
-        <Box sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+        <Paper sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
             <Badge color="secondary" badgeContent={`$${price}`}>
                 <CardMedia
                     sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
@@ -24,7 +24,7 @@ const HomeProduct = ({ product }) => {
                 </Link>
                 <Rating size='small' name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
             </CardActions>
-        </Box>)
+        </Paper>)
 
 };
 

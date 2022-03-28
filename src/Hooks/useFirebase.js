@@ -24,19 +24,21 @@ const useFirebase = () => {
         history.replace(destination)
         const user = result.user;
         // save user to database--
-        saveUsers(user.email, user.displayName, 'PUT')
+        saveUsers(user.email, 'PUT')
 
         setUser(user)
 
-        setAuthError('')
+
       }).catch((error) => {
         setAuthError(error.message)
 
+      }).finally(() => {
+        setAuthError('')
       })
   }
 
   // register user 
-  const registerUser = (email, password, name, location, history) => {
+  const registerUser = (email, password, name, photo, location, history) => {
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
 
@@ -44,15 +46,15 @@ const useFirebase = () => {
         // Signed in 
         // const user = userCredential.user;
         // ...
-        setAuthError('');
-        const newUser = { email, displayName: name };
+
+        const newUser = { email, displayName: name, photoURL: photo };
         setUser(newUser)
 
         // save to database-------------
-        saveUsers(email, name, 'POST')
+        saveUsers(email, 'POST')
         // updateProfile----------
         updateProfile(auth.currentUser, {
-          displayName: name
+          displayName: name, photoURL: photo
         }).then(() => {
           // Profile updated!
           // ...
@@ -63,7 +65,7 @@ const useFirebase = () => {
 
         const destination = location?.state?.from || '/';
         history.replace(destination)
-        setAuthError('')
+
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -72,10 +74,11 @@ const useFirebase = () => {
         // ..
       }).finally(() => {
         setIsLoading(false);
-
-
+        setAuthError('')
       })
   }
+
+
 
 
   const loginUser = (email, password, location, history) => {
@@ -84,7 +87,6 @@ const useFirebase = () => {
       .then((userCredential) => {
         const destination = location?.state?.from || '/';
         history.replace(destination)
-        setAuthError('')
 
       })
       .catch((error) => {
@@ -93,7 +95,7 @@ const useFirebase = () => {
         setAuthError(errorMessage)
       }).finally(() => {
         setIsLoading(false)
-
+        setAuthError('')
       })
   }
 
@@ -107,11 +109,28 @@ const useFirebase = () => {
       // An error happened.
     });
   }
+  //update user profile
+  const updateUserProfile = (email, displayName, photoURL) => {
+    const newUser = { email, displayName, photoURL };
+    setUser(newUser)
+    updateProfile(auth.currentUser, {
+      displayName, photoURL
+    }).then((res) => {
+  
+      // Profile updated!
+      console.log(res)
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+      setAuthError(error.message)
+    });
+  }
 
 
   // save user to database-------------
-  const saveUsers = (email, displayName, method) => {
-    const user = { email, displayName }
+  const saveUsers = (email, method) => {
+    const user = { email}
 
     fetch('https://evening-woodland-47343.herokuapp.com/users', {
       method: method,
@@ -168,7 +187,8 @@ const useFirebase = () => {
     setIsLoading,
     logOut,
     authError,
-    admin
+    admin,
+    updateUserProfile
 
   }
 }

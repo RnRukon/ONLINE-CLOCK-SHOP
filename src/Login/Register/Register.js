@@ -1,13 +1,19 @@
-import { Alert, AlertTitle, Button, Grid, LinearProgress, TextField } from '@mui/material';
+import { Box, Button, IconButton,LinearProgress, Stack, styled, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
+import uploadImage from '../../Hooks/useImgUpload';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
+
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const { registerUser, isLoading, authError } = useAuth();
     const location = useLocation()
-    const history = useHistory()
+    const history = useHistory();
+    const [photo, setPhoto] = useState('');
 
     const handleOnBlur = (e) => {
         const field = e.target.name;
@@ -19,20 +25,42 @@ const Register = () => {
     }
 
     const handleLoginSubmit = (e) => {
+        e.preventDefault();
         if (loginData.password !== loginData.rePassword) {
 
-            return alert('Your PassWord ded not match')
+            return Swal.fire({
+                icon: 'warning',
+                title: 'Warning!!!',
+                text: 'Password not Match🥵',
 
+            })
         }
 
-        registerUser(loginData.email, loginData.password, loginData.name, location, history)
-
-        e.preventDefault();
+        registerUser(loginData.email, loginData.password, loginData.name, photo, location, history)
         e.target.reset();
     }
+    const handleImgUpload = img => {
+        uploadImage(img)
+            .then(res => {
+                setPhoto(res.data.data.url);
+            })
+    }
+
+    const Input = styled('input')({
+        display: 'none',
+    });
+    
+authError&&Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: authError,
+   
+  })
+
+
     return (
 
-        <Grid >
+        <Box >
             {
                 isLoading ? <LinearProgress /> :
                     <form onSubmit={handleLoginSubmit}>
@@ -84,18 +112,24 @@ const Register = () => {
                             onBlur={handleOnBlur}
                             color="secondary"
                         />
-                        <Button color="secondary" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Register</Button>
+                        <Stack direction="row" alignItems="center" spacing={2}>
+
+                            <label htmlFor="icon-button-file">
+                                <Input 
+                                sx={{width:1}}
+                                accept="image/png, image/jpg, image/jpeg" id="icon-button-file" type="file"
+                                    onChange={e => handleImgUpload(e.target.files[0])}
+                                />
+                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
+                                Profile Photo
+                            </label>
+                        </Stack>
+                        <Button color="secondary" sx={{ width: 1, mt: 5 }} type="submit" variant="contained">Register</Button>
                     </form>
             }
-
-            {
-                authError && <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    {authError} <strong>check it out!</strong>
-                </Alert>
-            }
-
-        </Grid>
+        </Box>
 
     );
 };

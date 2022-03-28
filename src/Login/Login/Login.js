@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import useAuth from '../../Hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
@@ -20,11 +21,17 @@ const Login = () => {
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
         await loginUser(loginData.email, loginData.password, location, history)
-
         e.target.reset();
     }
+
+    authError && Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: authError,
+
+    })
     return (
-        <Grid sx={{ mt: 12 }}>
+        <Box >
             <form onSubmit={handleLoginSubmit}>
 
                 <TextField
@@ -52,16 +59,11 @@ const Login = () => {
                     onChange={login}
                     color="secondary"
                 />
-                <Button color="secondary" type="submit" sx={{ width: 1, mt: 5 }} className="feature-button" variant="contained">Login</Button>
+                <Button color="secondary" type="submit" sx={{ width: 1, mt: 5 }} variant="contained">Login</Button>
 
             </form>
 
-
-            {authError && <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                {authError} <strong>check it out!</strong>
-            </Alert>}
-        </Grid>
+        </Box>
     );
 };
 

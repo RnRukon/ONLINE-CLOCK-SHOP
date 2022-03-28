@@ -4,7 +4,7 @@ import { Typography, Box, Container, TextField, Divider, Toolbar } from '@mui/ma
 import './PorterToday.css'
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
-
+import Swal from 'sweetalert2';
 import Fade from '@mui/material/Fade';
 
 const style = {
@@ -48,7 +48,13 @@ const RequestToday = () => {
             .then(data => {
 
                 if (data.insertedId) {
-                    alert('Request Massage success')
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Your Request Sent Successfully!!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             })
 
@@ -63,13 +69,13 @@ const RequestToday = () => {
                 <Divider>
                     <Typography variant='h4'>Request Today!</Typography>
                 </Divider>
-                <Toolbar/>
+                <Toolbar />
                 <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', alignItems: 'center' }}>
                     <Box>
                         <img src="https://i.ibb.co/HxBh7Vn/5a914c1cb15d5c051b3690af.png" alt="" />
                     </Box>
-                    <Box sx={{py:2}}>
-                       
+                    <Box sx={{ py: 2 }}>
+
                         <Button onClick={handleOpen} variant='contained' color="secondary">Request Now</Button>
                     </Box>
                 </Box>

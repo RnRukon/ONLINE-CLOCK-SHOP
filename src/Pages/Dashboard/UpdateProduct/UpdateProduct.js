@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, CardActions, Grid, CardMedia, Typography, Badge, Divider, Toolbar, Fab } from '@mui/material';
+import { Button, Box, CardActions, Grid, CardMedia, Typography, Badge, Divider, Toolbar, Fab, Paper } from '@mui/material';
 import axios from 'axios';
 
 import UpdateProductFrom from './UpdateProductFrom/UpdateProductFrom';
@@ -88,7 +88,7 @@ const UpdateProduct = () => {
                 {
                     updateData.map(product =>
                         <Grid item xs={4} sm={4} md={3} key={product?._id}>
-                            <Box sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+                            <Paper sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
                                 <Badge color="secondary" badgeContent={`$${product?.price}`}>
                                     <CardMedia
                                         sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
@@ -119,7 +119,7 @@ const UpdateProduct = () => {
 
                                 </CardActions>
 
-                            </Box>
+                            </Paper>
                         </Grid>
                     )
                 }

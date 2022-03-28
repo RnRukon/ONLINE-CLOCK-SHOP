@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const RequestGet = () => {
     const [requestData, setRequestData] = useState([]) || ''
@@ -13,16 +14,41 @@ const RequestGet = () => {
     }, [setRequestData]);
 
     const deleteMassage = (id) => {
-        window.confirm("Are you sure you wish to delete this item?") &&
-            axios.delete(`https://evening-woodland-47343.herokuapp.com/massageDelete/${id}`)
-                .then(res => {
-                    res.data.deletedCount &&
-                        fetch('https://evening-woodland-47343.herokuapp.com/request')
-                            .then(res => res.json())
-                            .then(data => setRequestData(data))
-                }
 
-                )
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/massageDelete/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount) {
+                            const deleted = requestData.filter(data => data._id !== id);
+                            setRequestData(deleted);
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+
+                    }
+
+                    )
+
+
+
+            }
+        })
+
+
+
+
     }
     return (
         <div>
