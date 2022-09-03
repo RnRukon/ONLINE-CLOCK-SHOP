@@ -1,4 +1,4 @@
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert, Button, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const RequestGet = () => {
     const [requestData, setRequestData] = useState([]) || ''
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/request')
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/request')
             .then(res => res.json())
             .then(data => setRequestData(data))
     }, [setRequestData]);
@@ -25,7 +25,7 @@ const RequestGet = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/massageDelete/${id}`)
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/request/${id}`)
                     .then(res => {
                         if (res.data.deletedCount) {
                             const deleted = requestData.filter(data => data._id !== id);
@@ -51,16 +51,17 @@ const RequestGet = () => {
 
     }
     return (
-        <div>
-            <h1 className='mt-10 pb-4'>Customer Request</h1>
+        <>
+            <Toolbar />
+            <Typography variant='h5' sx={{ pb: 5 }}>Customer Request</Typography>
 
             {
                 requestData?.map((request, index) =>
                     <div key={index}>
-                        <Box severity="warning" className=' mt-2 border p-2 bg-blue-50'>
-                            <div className='flex justify-between items-center'>
+                        <Box severity="info" sx={{ mt: 2, p: 2, backgroundColor: '#e5f6fd' }} >
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div>
-                                    <Typography className=' text-pink-500'> Email: {request?.email}</Typography>
+                                    <Typography sx={{ color: 'red' }}> Email: {request?.email}</Typography>
                                     <Typography>Customer Name: {request?.name}</Typography>
                                     <Alert severity="info">Massage: {request?.massage}</Alert>
                                 </div>
@@ -68,12 +69,12 @@ const RequestGet = () => {
                                 <div>
                                     <Button onClick={() => deleteMassage(request?._id)} size='small' variant="outlined" color='secondary'>Delete</Button>
                                 </div>
-                            </div>
+                            </Box>
                         </Box>
                     </div>
                 )
             }
-        </div>
+        </>
     );
 };
 

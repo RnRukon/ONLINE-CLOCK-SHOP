@@ -20,7 +20,7 @@ const PlaceOrder = () => {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/placeProducts/${id}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])
@@ -44,7 +44,7 @@ const PlaceOrder = () => {
 
         const addToCartProduct = { product_name, product_profile, product_image, total_amount, cus_email, cus_name, date, status, color };
 
-        fetch('https://evening-woodland-47343.herokuapp.com/init', {
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/payment/init', {
             method: "POST",
             headers: {
 
@@ -106,7 +106,7 @@ const PlaceOrder = () => {
                             <Toolbar />
                             <Button sx={{ mr: 1 }} color='secondary' onClick={handleAddToCartProduct} variant="contained" >Purchase</Button>
 
-                            <Link to='/products'>
+                            <Link to='/products' style={{ textDecoration: "none" }}>
                                 <Button sx={{ mr: 1 }} color='primary' variant="contained"> Explore</Button>
                             </Link>
 

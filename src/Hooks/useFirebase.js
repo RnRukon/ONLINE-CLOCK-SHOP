@@ -48,7 +48,7 @@ const useFirebase = () => {
         // ...
 
         const newUser = { email, displayName: name, photoURL: photo };
-        setUser(newUser)
+        setUser(newUser);
 
         // save to database-------------
         saveUsers(email, 'POST')
@@ -116,7 +116,7 @@ const useFirebase = () => {
     updateProfile(auth.currentUser, {
       displayName, photoURL
     }).then((res) => {
-  
+
       // Profile updated!
       console.log(res)
       // ...
@@ -130,9 +130,9 @@ const useFirebase = () => {
 
   // save user to database-------------
   const saveUsers = (email, method) => {
-    const user = { email}
+    const user = { email }
 
-    fetch('https://evening-woodland-47343.herokuapp.com/users', {
+    fetch('https://evening-woodland-47343.herokuapp.com/api/v1/users', {
       method: method,
       headers: {
         'content-type': 'application/json'
@@ -164,7 +164,7 @@ const useFirebase = () => {
   // get admin ============================
   useEffect(() => {
 
-    fetch(`https://evening-woodland-47343.herokuapp.com/users/${user.email}`)
+    fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/users/${user.email}`)
 
       .then(res => res.json())
       .then(data => {
@@ -179,7 +179,8 @@ const useFirebase = () => {
 
 
   return {
-    user, setUser,
+    user,
+    setUser,
     signInWithGoogle,
     registerUser,
     loginUser,

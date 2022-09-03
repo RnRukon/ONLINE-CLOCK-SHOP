@@ -30,7 +30,7 @@ const ReviewPost = (props) => {
     const [reviews, setReviews] = useState([]) || '';
 
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/review')
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/review')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [setReviews])
@@ -39,7 +39,7 @@ const ReviewPost = (props) => {
 
 
     return (
-        <Box className='review-container  py-4'>
+        <Box>
             <Container >
 
                 <Divider>
@@ -50,7 +50,9 @@ const ReviewPost = (props) => {
                 <Box sx={{ flexGrow: 1 }}>
 
                     <Carousel
+
                         responsive={responsive}
+
                         className="py-20 px-1"
                         swipeable={true}
                         draggable={true}
@@ -71,7 +73,7 @@ const ReviewPost = (props) => {
 
                         {
                             reviews.map((review, index) =>
-                                <Box key={index} sx={{ boxShadow: '1px 2px 10px #cee3ff', mx: 2, height: 230, p: 2, borderRadius: 2,cursor:'pointer' }}>
+                                <Box key={index} sx={{ boxShadow: '1px 2px 10px #cee3ff', mx: 2, height: 230, p: 2, borderRadius: 2, cursor: 'pointer' }}>
 
                                     <Box >
 

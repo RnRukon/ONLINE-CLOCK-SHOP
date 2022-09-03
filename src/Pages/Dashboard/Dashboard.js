@@ -37,6 +37,7 @@ import { Avatar, Badge, Container, ListItemText, Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/styles';
 import { styled } from '@mui/material/styles';
 import MyProfile from '../MyProfile/MyProfile';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 const drawerWidth = 240;
 
 const useStyles = makeStyles({
@@ -125,12 +126,13 @@ function ResponsiveDrawer(props) {
                 <NavLink to={`${url}/myProfile`} style={iconsStyle}>
                     <ListItem button >
                         <ListItemIcon>
-                            <HomeIcon sx={iconsStyle} />
+                            <AccountCircleOutlinedIcon sx={iconsStyle} />
                         </ListItemIcon>
                         <ListItemText
-
+                            onClose={dashboard}
                             primary='My Profile' />
                     </ListItem>
+
                 </NavLink>
                 {!admin && <Box>
                     <NavLink to={`${url}`} style={iconsStyle}>
@@ -289,12 +291,8 @@ function ResponsiveDrawer(props) {
                     variant="permanent"
                     classes={{ paper: classes.paper }}
                     sx={{
-                        width: drawerWidth,
-                        flexShrink: 0,
-                        '& .MuiDrawer-paper': {
-                            width: drawerWidth,
-                            boxSizing: 'border-box',
-                        },
+                        display: { xs: 'none', sm: 'block' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     open
                 >

@@ -9,7 +9,7 @@ const Success = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/order/${id}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/payment/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])
@@ -18,9 +18,9 @@ const Success = () => {
     return (
         <Box>
             <Navigation />
-            <Container sx={{py:10}}>
-                <Typography variant='h4' 
-                sx={{color:'green',fontWeight:'bold',textAlign:'center',py:10}}
+            <Container sx={{ py: 10 }}>
+                <Typography variant='h4'
+                    sx={{ color: 'green', fontWeight: 'bold', textAlign: 'center', py: 10 }}
                 >Permanent Successfully</Typography>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container
@@ -52,7 +52,7 @@ const Success = () => {
                             <Toolbar />
 
 
-                            <Link to='/products'>
+                            <Link to='/products' style={{ textDecoration: "none" }}>
                                 <Button sx={{ mr: 1 }}
                                     size='small'
                                     color='primary'
@@ -68,7 +68,7 @@ const Success = () => {
                                 variant="contained">
                                 Go Back
                             </Button>
-                            <Link to='/dashboard'>
+                            <Link to='/dashboard' style={{ textDecoration: "none" }}>
                                 <Button
                                     size='small'
                                     color='info'

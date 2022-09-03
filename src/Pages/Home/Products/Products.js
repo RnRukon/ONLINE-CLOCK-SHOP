@@ -1,23 +1,21 @@
-import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Badge, Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Paper, Rating, Stack, Toolbar, Typography } from '@mui/material';
+import { Badge, Box, Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Paper, Rating, Stack, Toolbar, Typography } from '@mui/material';
 
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
     const [products, setProducts] = useState([]) || '';
     const [page, setPage] = useState(0);
     const [counter, setCounter] = useState(0)
-
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/products?page=${page}&size=12`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products?page=${page}&size=12`)
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [setProducts, page]);
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/products`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products`)
             .then(res => res.json())
             .then(data => setCounter(data.length));
     }, [setCounter, page]);
@@ -29,7 +27,7 @@ const Products = () => {
 
 
     return (
-        <Box className='product-container '>
+        <Box >
             <Navigation />
             <Box sx={{
                 backgroundImage: 'url(https://i.ibb.co/fpMbwX8/shutterstock-219283411-resize.jpg)',
@@ -46,7 +44,7 @@ const Products = () => {
                 <Toolbar />
                 <Toolbar />
             </Box>
-            <Container className='py-11'>
+            <Container sx={{ py: 11 }}>
                 <Divider>
                     <Typography color="secondary" variant='h4' sx={{ textAlign: 'center', fontWeight: 'bold' }}>
                         Unique Collection
@@ -75,7 +73,7 @@ const Products = () => {
                                         <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product?.description.slice(0, 50)} ...</Typography>
                                     </Box>
                                     <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Link to={`placeOrder/${product?._id}`}>
+                                        <Link to={`placeOrder/${product?._id}`} style={{ textDecoration: "none" }}>
                                             <Button color="secondary" size='small' variant="contained">Purchase</Button>
                                         </Link>
                                         <Rating size='small' name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />

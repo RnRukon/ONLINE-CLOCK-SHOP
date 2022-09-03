@@ -15,7 +15,7 @@ const UpdateProduct = () => {
 
 
     const fetchData = () => {
-        fetch('https://evening-woodland-47343.herokuapp.com/products')
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products')
             .then(res => res.json())
             .then(data => setUpdateData(data) || '')
     }
@@ -36,10 +36,10 @@ const UpdateProduct = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/productDelete/${id}`)
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`)
 
                     .then(res => {
-                        if (res.data.deletedCount === 1) {
+                        if (res.status === 200) {
                             const deleted = updateData.filter((d) => d._id !== id);
                             setUpdateData(deleted);
                             Swal.fire(

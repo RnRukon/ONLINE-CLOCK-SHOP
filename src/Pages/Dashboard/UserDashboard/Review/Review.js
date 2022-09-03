@@ -50,7 +50,7 @@ const Review = () => {
         reviewData.img = user.photoURL;
         reviewData.rating = ratingValue;
 
-        fetch('https://evening-woodland-47343.herokuapp.com/review', {
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/review', {
             method: "POST",
             headers: {
 
@@ -84,8 +84,8 @@ const Review = () => {
                 Review
             </Typography>
 
-            <Box className="row">
-                <Grid className="col-lg-6" >
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={4} sm={4} md={4}>
                     {
                         isLoading ? <LinearProgress /> :
                             <form onSubmit={handleReviewPost}>
@@ -125,7 +125,7 @@ const Review = () => {
                                     )}
                                 </Box> <br />
 
-                                <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" className="feature-button" variant="contained">Review</Button>
+                                <Button color="warning" sx={{ width: 1, mt: 5 }} type="submit" variant="contained">Review</Button>
                             </form>
                     }
 
@@ -139,10 +139,10 @@ const Review = () => {
                     </Stack>
 
                 </Grid>
-                <Grid className="col-lg-6">
+                <Grid item xs={4} sm={4} md={6}>
                     <img src="https://i.ibb.co/vcgtgKr/2560px-Intro-img-svg.png" alt="" />
                 </Grid>
-            </Box>
+            </Grid>
         </div>
     );
 };

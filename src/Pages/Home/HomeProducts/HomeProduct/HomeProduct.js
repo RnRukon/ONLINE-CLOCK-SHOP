@@ -19,7 +19,7 @@ const HomeProduct = ({ product }) => {
                 <Typography variant="body2" sx={{ textAlign: 'justify' }}>{description.slice(0, 50)} ...</Typography>
             </Box>
             <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Link to={`placeOrder/${_id}`}>
+                <Link to={`placeOrder/${_id}`} style={{textDecoration:"none"}}>
                     <Button color="secondary" size='small' variant="contained">Place Order</Button>
                 </Link>
                 <Rating size='small' name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />

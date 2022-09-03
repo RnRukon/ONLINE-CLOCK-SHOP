@@ -7,7 +7,7 @@ import { Button, TableRow, TableCell } from '@mui/material';
 
 
 const ManageALlOrder = (props) => {
-    const { product_name, ship_postcode, date, cus_email, cus_name, status, color, _id } = props?.product;
+    const { product_name, ship_postcode, date, cus_email, cus_name, status, _id } = props?.product;
     const { handleSetStatus, index } = props;
 
     const handleChange = (event) => {
@@ -15,6 +15,8 @@ const ManageALlOrder = (props) => {
         handleSetStatus(status, _id)
 
     }
+
+    const color = { color: status === 'Pending' ? 'blue':status === 'Approved'?'green':status === 'Shipped'&&'red' }
 
     return (
 
@@ -37,11 +39,13 @@ const ManageALlOrder = (props) => {
             <TableCell align="center">{product_name}</TableCell>
             <TableCell align="center">{ship_postcode}</TableCell>
             <TableCell align="center">
-                <FormControl sx={{ minWidth: 80 }}>
+                <FormControl sx={{ minWidth: '120px',maxWidth: '120px' }}
+                
+                >
                     <InputLabel id="demo-simple-select-autowidth-label">Action</InputLabel>
 
                     <Select
-                        sx={{ color: { color } }}
+                        sx={{ color }}
                         labelId="demo-simple-select-autowidth-label"
                         id="demo-simple-select-autowidth"
                         value={status}

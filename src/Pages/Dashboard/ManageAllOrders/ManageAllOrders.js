@@ -18,10 +18,15 @@ const ManageAllOrders = () => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [page, setPage] = React.useState(0);
 
-    useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
+
+
+    const fetchingData = () => {
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/orders')
             .then(res => res.json())
             .then(data => setProducts(data))
+    }
+    useEffect(() => {
+        fetchingData()
     }, [])
 
 
@@ -37,28 +42,27 @@ const ManageAllOrders = () => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/manageAllOrderDelete/${id}`)
 
-                .then(res=>{
-                    if (res.data.deletedCount === 1) {
-                        const deleted = products.filter((d) => d._id !== id);
-                        setProducts(deleted);
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                          )
-                    }
-                    
-                })
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${id}`)
+                    .then(res => {
 
-             
+                        if (res.data.deletedCount === 1) {
+                            fetchingData()
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
             }
-          })
+        })
+
 
     }
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -68,7 +72,7 @@ const ManageAllOrders = () => {
         setPage(0);
     };
 
- 
+
 
 
 
@@ -77,27 +81,35 @@ const ManageAllOrders = () => {
     const handleSetStatus = (status, statusId) => {
 
         const newData = { status }
-        newData.color = 'rgb(34, 253, 0)'
-        fetch(`https://evening-woodland-47343.herokuapp.com/statusUpdate/${statusId}`, {
-            method: "PUT",
-            headers: {
+        newData.color = 'rgb(34, 253, 0)';
 
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+
+                axios.put(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${statusId}`, newData)
+                    .then(res => {
+
+                        if (res.status === 200) {
+                            fetchingData()
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+            }
         })
-            .then(res => res.json())
-            .then(data => {
-
-                if (data.modifiedCount) {
-
-                    fetch('https://evening-woodland-47343.herokuapp.com/allOrder')
-                        .then(res => res.json())
-                        .then(data => setProducts(data))
-                }
-            })
-
-
     };
 
     return (
@@ -136,7 +148,7 @@ const ManageAllOrders = () => {
                     </TableHead>
                     <TableBody>
 
-                        {products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product,index) =>
+                        {products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product, index) =>
 
                             <ManageALlOrder
                                 key={product._id}
@@ -152,7 +164,7 @@ const ManageAllOrders = () => {
                     </TableBody>
 
                 </Table>
-                <Divider/>
+                <Divider />
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"

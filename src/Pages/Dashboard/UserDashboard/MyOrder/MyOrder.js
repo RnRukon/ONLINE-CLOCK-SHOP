@@ -1,9 +1,10 @@
-import axios from 'axios';
+
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../Hooks/useAuth';
 import { Button, Box, CardActions, Grid, Badge, CardMedia, Typography } from '@mui/material';
 import './MyOrder.css'
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 
 const MyOrder = () => {
@@ -11,10 +12,12 @@ const MyOrder = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/myOrder/${user?.email}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${user?.email}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [user?.email])
+
+
 
 
 
@@ -31,12 +34,12 @@ const MyOrder = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/myOrderDelete/${id}`)
+                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${id}`)
                     .then(res => {
 
-                        if (res.data.deletedCount === 1) {
+                        if (res.status === 200) {
                             const deleted = products.filter((d) => d._id !== id);
-                            setProducts(deleted)
+                            setProducts(deleted);
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
@@ -49,7 +52,6 @@ const MyOrder = () => {
 
 
     }
-
 
 
     return (
@@ -90,7 +92,7 @@ const MyOrder = () => {
                             <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
                                 <Button
-                                    onClick={() => handleMyOrderDelete(product._id)}
+                                    onClick={() => handleMyOrderDelete(product?._id)}
                                     color="error" size='small' variant="contained">Delete</Button>
 
                                 <Button size='small'

@@ -47,7 +47,7 @@ const AddedProduct = () => {
     const handleAddAProduct = (e) => {
         e.preventDefault();
         const newData = { ...productData, img, rating: value }
-        fetch('https://evening-woodland-47343.herokuapp.com/addedProduct', {
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products', {
             method: "POST",
             headers: {
 
@@ -75,12 +75,12 @@ const AddedProduct = () => {
     return (
         <Box style={{ height: '100vh' }}>
             <Toolbar />
-            <Typography variant='h4' className='text-pink-600'>
+            <Typography variant='h5' >
                 ADD A PRODUCT
             </Typography>
 
-            <Box className='row'>
-                <Grid className='col-lg-5 mt-lg-5'>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={4} sm={4} md={6}>
                     {
                         isLoading ? <LinearProgress /> :
                             <form onSubmit={handleAddAProduct}>
@@ -166,10 +166,10 @@ const AddedProduct = () => {
 
 
                 </Grid>
-                <Grid className="col-lg-7">
+                <Grid item xs={2} sm={4} md={6}>
                     <img src="https://i2.wp.com/files.123freevectors.com/wp-content/uploads/new/objects/407-free-clock-vector-illustrator.png" alt="" />
                 </Grid>
-            </Box>
+            </Grid>
         </Box>
     );
 };

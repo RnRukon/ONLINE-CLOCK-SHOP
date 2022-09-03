@@ -1,6 +1,5 @@
 import React from 'react';
-import { TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Grid, TextField, Toolbar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
@@ -12,7 +11,7 @@ const MakeAdmin = () => {
     const handleAddAdmin = (data) => {
 
 
-        fetch('https://evening-woodland-47343.herokuapp.com/users/admin', {
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/users/admin', {
             method: "PUT",
             headers: {
 
@@ -35,9 +34,10 @@ const MakeAdmin = () => {
     }
     return (
         <div>
+            <Toolbar />
             <Typography variant='h6' color="secondary">Make Admin</Typography>
-            <Box className='row'>
-                <Box className="col-lg-6">
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={4} sm={4} md={6}>
                     <form onSubmit={handleSubmit(handleAddAdmin)}>
 
                         <TextField
@@ -50,11 +50,11 @@ const MakeAdmin = () => {
                         <Button sx={{ width: 1, mt: 5 }} color="secondary" type='submit' variant='contained' >Add Admin</Button>
 
                     </form>
-                </Box>
-                <Box className='col-lg-6'>
-                    <img style={{ width: '100%' }} src="https://i.ibb.co/6wczVJp/login-img.png" alt="" />
-                </Box>
-            </Box>
+                </Grid>
+                <Grid item xs={4} sm={4} md={6}>
+                    <img src="https://i.ibb.co/6wczVJp/login-img.png" alt="" />
+                </Grid>
+            </Grid>
         </div>
     );
 };

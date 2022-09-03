@@ -1,13 +1,18 @@
-import { Button } from '@mui/material';
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Box, Button, Typography } from '@mui/material';
+
 const NoteFound = () => {
     return (
-        <div className='mt-64 text-center'>
-            <h1>Note Found</h1>
-            <h1 className='text-8xl'>4<span className='text-red-600'>0</span>4</h1>
-            <Link to='/'><Button>Back</Button></Link>
-        </div>
+        <Box sx={{display:'flex',justifyContent:'center',alignItems:"center",height:'100vh',textAlign:'center'}}>
+           <Box>
+           <h1>Note Found Page</h1>
+            <Typography variant='h1'sx={{fontWeight:'900',fontFamily:'fantasy'}}>4<span style={{color:'red'}}>0</span>4</Typography>
+         
+                <Button variant="outlined" 
+                onClick={()=>window.history.back()}>Back</Button>
+                
+           </Box>
+        </Box>
     );
 };
 

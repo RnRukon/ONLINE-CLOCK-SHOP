@@ -21,7 +21,7 @@ const Navigation = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav style={{marginLeft:'auto'}}>
                         <Nav.Link as={NavLink} style={style} to="/"><Button sx={{ color: 'yellow' }}>Home</Button></Nav.Link>
                         <Nav.Link as={NavLink} style={style} to="/products"><Button sx={{ color: 'yellow' }}>Products</Button></Nav.Link>
 

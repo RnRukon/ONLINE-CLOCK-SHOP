@@ -9,7 +9,7 @@ const HomeProducts = () => {
     const [products, setProduces] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/products')
+        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products')
             .then(res => res.json())
             .then(data => setProduces(data))
     }, [])
@@ -20,7 +20,7 @@ const HomeProducts = () => {
                 <Toolbar />
 
                 <Divider>
-                    <Typography color="secondary" variant='h4' sx={{ textAlign: 'center', fontWeight: 'bold'}}>
+                    <Typography color="secondary" variant='h4' sx={{ textAlign: 'center', fontWeight: 'bold' }}>
                         Unique Collection
                     </Typography>
                 </Divider>

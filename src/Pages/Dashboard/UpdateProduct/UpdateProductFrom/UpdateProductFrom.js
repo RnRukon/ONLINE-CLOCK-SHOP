@@ -34,7 +34,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
     const [hover, setHover] = React.useState(-1);
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/placeProducts/${id}`)
+        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
@@ -47,9 +47,11 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
 
     const update = (data) => {
         const newUpdateData = { ...data, img, rating: value }
-        axios.put(`https://evening-woodland-47343.herokuapp.com/updateProduct/${id}`, newUpdateData)
+        axios.put(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`, newUpdateData)
             .then(res => {
-                if (res?.data?.modifiedCount) {
+
+
+                if (res?.status === 200) {
                     alert('Update SuccessFully')
                     handleClose()
                     fetchData()
@@ -131,6 +133,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
                                                 Image
                                             </label>
                                         </Stack>
+                                        <img style={{ width: 50 }} src={img} alt="" />
                                         <Box
                                             sx={{
                                                 width: 200,

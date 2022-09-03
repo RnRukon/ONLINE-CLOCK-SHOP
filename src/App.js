@@ -21,7 +21,7 @@ import Success from './Pages/Home/HomeProducts/HomeProduct/PlaceOrder/Success';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <AuthProvider>
         <Router>
           <Switch>
@@ -54,7 +54,7 @@ function App() {
           </Switch>
         </Router>
       </AuthProvider>
-    </div>
+    </>
   );
 }
 
