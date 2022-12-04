@@ -21,7 +21,7 @@ const ManageAllOrders = () => {
 
 
     const fetchingData = () => {
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/orders')
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/orders')
             .then(res => res.json())
             .then(data => setProducts(data))
     }
@@ -45,7 +45,7 @@ const ManageAllOrders = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${id}`)
+                axios.delete(`https://online-clock-shop-server.onrender.com/api/v1/orders/${id}`)
                     .then(res => {
 
                         if (res.data.deletedCount === 1) {
@@ -95,7 +95,7 @@ const ManageAllOrders = () => {
             if (result.isConfirmed) {
 
 
-                axios.put(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${statusId}`, newData)
+                axios.put(`https://online-clock-shop-server.onrender.com/api/v1/orders/${statusId}`, newData)
                     .then(res => {
 
                         if (res.status === 200) {

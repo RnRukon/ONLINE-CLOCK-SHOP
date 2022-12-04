@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, CardActions, Grid, CardMedia, Typography, Badge, Divider, Toolbar, Fab, Paper } from '@mui/material';
+import { Button, Box, CardActions, Grid, CardMedia, Typography, Badge, Divider, Toolbar, Fab, Card, CardContent } from '@mui/material';
 import axios from 'axios';
 
 import UpdateProductFrom from './UpdateProductFrom/UpdateProductFrom';
@@ -15,7 +15,7 @@ const UpdateProduct = () => {
 
 
     const fetchData = () => {
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products')
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/products')
             .then(res => res.json())
             .then(data => setUpdateData(data) || '')
     }
@@ -36,7 +36,7 @@ const UpdateProduct = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`)
+                axios.delete(`https://online-clock-shop-server.onrender.com/api/v1/products/${id}`)
 
                     .then(res => {
                         if (res.status === 200) {
@@ -88,20 +88,21 @@ const UpdateProduct = () => {
                 {
                     updateData.map(product =>
                         <Grid item xs={4} sm={4} md={3} key={product?._id}>
-                            <Paper sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
-                                <Badge color="secondary" badgeContent={`$${product?.price}`}>
+                            <Card sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+                                <Badge color="secondary" badgeContent={`$${product.price}`}>
                                     <CardMedia
-                                        sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
                                         component="img"
-                                        src={product?.img} alt={product?.title} />
-                                </Badge >
-                                <Box>
-                                    <Typography variant="body"
-                                        sx={{ fontWeight: 'bold' }}>
-                                        {product?.title.slice(0, 20)}</Typography>
+                                        alt="green iguana"
+                                        sx={{ height: 260, objectFit: 'contain' }}
+                                        image={product.img}
+                                    /></Badge>
+                                <CardContent>
+                                    <Typography variant="body" sx={{ fontWeight: 'bold' }}>{product.title.slice(0, 20)}</Typography>
+                                    <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product.description.slice(0, 50)} ...</Typography>
+                                </CardContent>
 
-                                    <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product?.description.slice(0, 50)} ...</Typography>
-                                </Box>
+
+
                                 <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
                                     <Button
@@ -119,7 +120,7 @@ const UpdateProduct = () => {
 
                                 </CardActions>
 
-                            </Paper>
+                            </Card>
                         </Grid>
                     )
                 }

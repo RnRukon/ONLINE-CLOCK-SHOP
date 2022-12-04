@@ -11,7 +11,7 @@ const MakeAdmin = () => {
     const handleAddAdmin = (data) => {
 
 
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/users/admin', {
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/users/admin', {
             method: "PUT",
             headers: {
 

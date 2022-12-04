@@ -34,7 +34,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
     const [hover, setHover] = React.useState(-1);
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`)
+        fetch(`https://online-clock-shop-server.onrender.com/api/v1/products/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
@@ -47,7 +47,7 @@ const UpdateProductFrom = ({ id, handleClose, open, scroll, fetchData }) => {
 
     const update = (data) => {
         const newUpdateData = { ...data, img, rating: value }
-        axios.put(`https://evening-woodland-47343.herokuapp.com/api/v1/products/${id}`, newUpdateData)
+        axios.put(`https://online-clock-shop-server.onrender.com/api/v1/products/${id}`, newUpdateData)
             .then(res => {
 
 

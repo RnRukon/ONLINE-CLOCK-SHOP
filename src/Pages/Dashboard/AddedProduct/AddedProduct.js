@@ -47,7 +47,7 @@ const AddedProduct = () => {
     const handleAddAProduct = (e) => {
         e.preventDefault();
         const newData = { ...productData, img, rating: value }
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products', {
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/products', {
             method: "POST",
             headers: {
 

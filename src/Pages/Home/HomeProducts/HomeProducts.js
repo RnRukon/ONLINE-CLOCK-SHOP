@@ -9,12 +9,12 @@ const HomeProducts = () => {
     const [products, setProduces] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/products')
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/products')
             .then(res => res.json())
             .then(data => setProduces(data))
     }, [])
     return (
-        <Box >
+        <Box sx={{ pb: 20 }}>
             {products?.length === 0 && <LinearProgress color="secondary" />}
             <Box>
                 <Toolbar />

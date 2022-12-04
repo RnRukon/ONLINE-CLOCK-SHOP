@@ -30,7 +30,7 @@ const ReviewPost = (props) => {
     const [reviews, setReviews] = useState([]) || '';
 
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/review')
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/review')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [setReviews])

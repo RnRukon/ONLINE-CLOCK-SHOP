@@ -12,7 +12,7 @@ const MyOrder = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${user?.email}`)
+        fetch(`https://online-clock-shop-server.onrender.com/api/v1/orders/${user?.email}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [user?.email])
@@ -34,7 +34,7 @@ const MyOrder = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/orders/${id}`)
+                axios.delete(`https://online-clock-shop-server.onrender.com/api/v1/orders/${id}`)
                     .then(res => {
 
                         if (res.status === 200) {

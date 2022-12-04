@@ -8,7 +8,7 @@ const Navigation = () => {
 
     const style = {
         fontWeight: "bold",
-        color: "Yellow"
+        color: "waite"
     }
     const location = useLocation().pathname;
     return (
@@ -21,12 +21,12 @@ const Navigation = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav style={{marginLeft:'auto'}}>
-                        <Nav.Link as={NavLink} style={style} to="/"><Button sx={{ color: 'yellow' }}>Home</Button></Nav.Link>
-                        <Nav.Link as={NavLink} style={style} to="/products"><Button sx={{ color: 'yellow' }}>Products</Button></Nav.Link>
+                    <Nav style={{ marginLeft: 'auto' }}>
+                        <Nav.Link as={NavLink} style={style} to="/"><Button sx={{ color: '#fff' }}>Home</Button></Nav.Link>
+                        <Nav.Link as={NavLink} style={style} to="/products"><Button sx={{ color: '#fff' }}>Products</Button></Nav.Link>
 
                         {
-                            user.email && <Nav.Link as={NavLink} style={style} to="/dashboard"><Button sx={{ color: 'yellow' }}>Dashboard</Button></Nav.Link>
+                            user.email && <Nav.Link as={NavLink} style={style} to="/dashboard"><Button sx={{ color: '#fff' }}>Dashboard</Button></Nav.Link>
                         }
 
                         {

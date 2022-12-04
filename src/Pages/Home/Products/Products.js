@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../../Sheard/Navigation/Navigation';
 import { Link } from 'react-router-dom';
-import { Badge, Box, Button, CardActions, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Paper, Rating, Stack, Toolbar, Typography } from '@mui/material';
+import { Badge, Box, Button, Card, CardActions, CardContent, CardMedia, Container, Divider, Grid, LinearProgress, Pagination, Rating, Stack, Toolbar, Typography } from '@mui/material';
 
 import Footer from '../../Sheard/Footer/Footer';
 const Products = () => {
@@ -9,13 +9,13 @@ const Products = () => {
     const [page, setPage] = useState(0);
     const [counter, setCounter] = useState(0)
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products?page=${page}&size=12`)
+        fetch(`https://online-clock-shop-server.onrender.com/api/v1/products?page=${page}&size=12`)
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [setProducts, page]);
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/products`)
+        fetch(`https://online-clock-shop-server.onrender.com/api/v1/products`)
             .then(res => res.json())
             .then(data => setCounter(data.length));
     }, [setCounter, page]);
@@ -58,27 +58,25 @@ const Products = () => {
                     {
                         products?.map(product =>
                             <Grid item xs={4} sm={4} md={3} key={product?._id}>
-                                <Paper sx={{ boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
-                                    <Badge badgeContent={` $${product?.price}`} color="secondary">
+                                <Card sx={{ maxWidth: 345, boxShadow: '1px 2px 10px #cee3ff', padding: 2, borderRadius: 2, height: 1 }}>
+                                    <Badge color="secondary" badgeContent={`$${product.price}`}>
                                         <CardMedia
-                                            sx={{ width: { xs: '100%', sm: '100%', md: '100%' } }}
                                             component="img"
-                                            src={product?.img} alt={product?.title} />
-                                    </Badge>
-                                    <Box>
-                                        <Typography variant="body"
-                                            sx={{ fontWeight: 'bold' }}>
-                                            {product?.title.slice(0, 20)}</Typography>
-
-                                        <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product?.description.slice(0, 50)} ...</Typography>
-                                    </Box>
+                                            alt="green iguana"
+                                            sx={{ height: 260, objectFit: 'contain' }}
+                                            image={product.img}
+                                        /></Badge>
+                                    <CardContent>
+                                        <Typography variant="body" sx={{ fontWeight: 'bold' }}>{product.title.slice(0, 20)}</Typography>
+                                        <Typography variant="body2" sx={{ textAlign: 'justify' }}>{product.description.slice(0, 50)} ...</Typography>
+                                    </CardContent>
                                     <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Link to={`placeOrder/${product?._id}`} style={{ textDecoration: "none" }}>
-                                            <Button color="secondary" size='small' variant="contained">Purchase</Button>
+                                        <Link to={`placeOrder/${product._id}`} style={{ textDecoration: "none" }}>
+                                            <Button color="secondary" size='small' variant="contained">Place Order</Button>
                                         </Link>
                                         <Rating size='small' name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
                                     </CardActions>
-                                </Paper>
+                                </Card>
                             </Grid>)
                     }
                 </Grid>

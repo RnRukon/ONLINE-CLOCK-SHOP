@@ -35,7 +35,7 @@ const RequestToday = () => {
     }
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/request', {
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/request', {
             method: "POST",
             headers: {
 

@@ -9,7 +9,7 @@ const Success = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/payment/${id}`)
+        fetch(`https://online-clock-shop-server.onrender.com/api/v1/payment/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id, setProduct])

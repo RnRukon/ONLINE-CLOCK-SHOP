@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const RequestGet = () => {
     const [requestData, setRequestData] = useState([]) || ''
     useEffect(() => {
-        fetch('https://evening-woodland-47343.herokuapp.com/api/v1/request')
+        fetch('https://online-clock-shop-server.onrender.com/api/v1/request')
             .then(res => res.json())
             .then(data => setRequestData(data))
     }, [setRequestData]);
@@ -25,7 +25,7 @@ const RequestGet = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://evening-woodland-47343.herokuapp.com/api/v1/request/${id}`)
+                axios.delete(`https://online-clock-shop-server.onrender.com/api/v1/request/${id}`)
                     .then(res => {
                         if (res.data.deletedCount) {
                             const deleted = requestData.filter(data => data._id !== id);

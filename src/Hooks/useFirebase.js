@@ -132,7 +132,7 @@ const useFirebase = () => {
   const saveUsers = (email, method) => {
     const user = { email }
 
-    fetch('https://evening-woodland-47343.herokuapp.com/api/v1/users', {
+    fetch('https://online-clock-shop-server.onrender.com/api/v1/users', {
       method: method,
       headers: {
         'content-type': 'application/json'
@@ -164,7 +164,7 @@ const useFirebase = () => {
   // get admin ============================
   useEffect(() => {
 
-    fetch(`https://evening-woodland-47343.herokuapp.com/api/v1/users/${user.email}`)
+    fetch(`https://online-clock-shop-server.onrender.com/api/v1/users/${user.email}`)
 
       .then(res => res.json())
       .then(data => {
