@@ -82,7 +82,7 @@ const ManageAllOrders = () => {
 
         const newData = { status }
         newData.color = 'rgb(34, 253, 0)';
-
+       
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -90,7 +90,7 @@ const ManageAllOrders = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: status
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -102,8 +102,8 @@ const ManageAllOrders = () => {
                             fetchingData()
 
                             Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
+                                ` ${status}! `,
+                                `Your file has been ${status}.`,
                                 'success'
                             )
                         }
